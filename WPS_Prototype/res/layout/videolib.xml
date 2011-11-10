@@ -1,0 +1,9 @@
+
+    <RelativeLayout android:id="@+id/relativeLayout1" android:layout_width="fill_parent" android:layout_height="fill_parent" xmlns:android="http://schemas.android.com/apk/res/android">
+        <TextView android:id="@+id/textView1" android:text="Video Library" android:textAppearance="?android:attr/textAppearanceLarge" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_alignParentTop="true" android:layout_centerHorizontal="true" android:layout_marginTop="16dp"></TextView>
+        <Button android:text="D: Motor" android:id="@+id/btnVLD" android:layout_width="250dp" android:layout_height="wrap_content" android:layout_below="@+id/btnVLC" android:layout_centerHorizontal="true" android:layout_marginTop="24dp"></Button>
+        <Button android:text="B: Media Filter" android:id="@+id/btnVLB" android:layout_width="250dp" android:layout_height="wrap_content" android:layout_above="@+id/btnVLC" android:layout_alignLeft="@+id/btnVLD" android:layout_marginBottom="22dp"></Button>
+        <Button android:text="A: Feed Pump" android:id="@+id/btnVLA" android:layout_width="250dp" android:layout_height="wrap_content" android:layout_above="@+id/btnVLB" android:layout_alignLeft="@+id/btnVLB" android:layout_marginBottom="28dp"></Button>
+        <Button android:text="C: Cartridges" android:id="@+id/btnVLC" android:layout_width="250dp" android:layout_height="wrap_content" android:layout_centerVertical="true" android:layout_alignLeft="@+id/btnVLB"></Button>
+        <Button android:text="Back to Status" android:id="@+id/btnVLBack" android:layout_width="250dp" android:layout_height="wrap_content" android:layout_alignParentBottom="true" android:layout_alignLeft="@+id/btnVLD" android:layout_marginBottom="38dp"></Button>
+    </RelativeLayout>
