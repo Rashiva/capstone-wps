@@ -1,0 +1,6 @@
+
+    <RelativeLayout android:id="@+id/relativeLayout1" android:layout_width="fill_parent" android:layout_height="fill_parent" xmlns:android="http://schemas.android.com/apk/res/android">
+        <TextView android:id="@+id/textView1" android:text="Video" android:textAppearance="?android:attr/textAppearanceLarge" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_alignParentTop="true" android:layout_centerHorizontal="true" android:layout_marginTop="24dp"></TextView>
+        <VideoView android:id="@+id/videoView1" android:layout_width="wrap_content" android:layout_height="300dp" android:layout_centerVertical="true" android:layout_alignParentLeft="true"></VideoView>
+        <Button android:text="Video Library" android:id="@+id/btnVidBack" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_alignParentBottom="true" android:layout_centerHorizontal="true" android:layout_marginBottom="20dp"></Button>
+    </RelativeLayout>
