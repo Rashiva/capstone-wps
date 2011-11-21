@@ -23,18 +23,26 @@ public class WPSTab2 extends Activity {
  	       }
  	   });
  	   
- 	   // change progress bars
- 	   ProgressBar pb1 = (ProgressBar) findViewById(R.id.progressBar1);
- 	   pb1.setProgress(25);
+ 	   // Input Data Table (Event Driven)
  	   
- 	   ProgressBar pb2 = (ProgressBar) findViewById(R.id.progressBar2);
-	   pb2.setProgress(50);
+ 	   // Save Data Locally (Necessary ???)
+ 	   
+ 	   // Interpret Data
+ 	   
+ 	   // Update Progress Bars
+ 	   ProgressBar pbFeedPump = (ProgressBar) findViewById(R.id.progressBar1);
+ 	   pbFeedPump.setProgress(25);
+ 	   
+ 	   ProgressBar pbMediaFilter = (ProgressBar) findViewById(R.id.progressBar2);
+	   pbMediaFilter.setProgress(50);
 	   
-	   ProgressBar pb3 = (ProgressBar) findViewById(R.id.progressBar3);
- 	   pb3.setProgress(75);
+	   ProgressBar pbCartridges = (ProgressBar) findViewById(R.id.progressBar3);
+ 	   pbCartridges.setProgress(75);
  	   
- 	  ProgressBar pb4 = (ProgressBar) findViewById(R.id.progressBar4);
-	   pb4.setProgress(100);
+ 	   ProgressBar pbMotor = (ProgressBar) findViewById(R.id.progressBar4);
+	   pbMotor.setProgress(100);
+	   
+	   // Output Data Table to Controllers
  	   
     }
 }
