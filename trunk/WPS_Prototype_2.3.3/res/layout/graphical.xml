@@ -7,7 +7,7 @@
         android:orientation="vertical"
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
-        android:padding="5dp">
+        android:padding="5dp" android:weightSum="1">
         <TabWidget
             android:id="@android:id/tabs"
             android:layout_width="fill_parent"
@@ -15,10 +15,28 @@
         <FrameLayout
             android:id="@android:id/tabcontent"
             android:layout_width="fill_parent"
-            android:layout_height="300dp"
-            android:padding="5dp" >
-            <ImageView android:id="@+id/imageView1" android:src="@drawable/filter" android:layout_height="250dp" android:layout_width="match_parent"></ImageView>
+            android:padding="5dp" 
+            android:layout_weight="0.54" 
+            android:layout_height="match_parent">
+            <RelativeLayout 
+            	android:id="@+id/relativeLayout1" 
+            	android:layout_width="match_parent" 
+            	android:layout_height="match_parent">
+                <ImageView 
+                	android:src="@drawable/filter" 
+                	android:layout_height="250dp" 
+                	android:layout_width="match_parent" 
+                	android:id="@+id/imageView1">
+                </ImageView>
+                <Button 
+                	android:layout_height="wrap_content" 
+                	android:id="@+id/btnVideoLib" 
+                	android:text="Video Library" 
+                	android:layout_width="299dp" 
+                	android:layout_below="@+id/imageView1" 
+                	android:layout_alignParentLeft="true">
+                </Button>
+            </RelativeLayout>
         </FrameLayout>
-        <Button android:text="Video Library" android:layout_height="wrap_content" android:id="@+id/btnVideoLib" android:layout_width="299dp"></Button>
     </LinearLayout>
 </TabHost>
