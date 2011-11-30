@@ -1,35 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
-<TabHost xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@android:id/tabhost"
-    android:layout_width="fill_parent"
-    android:layout_height="fill_parent">
-    <LinearLayout 
-    	android:orientation="vertical"
-        android:layout_width="fill_parent"
-        android:layout_height="fill_parent"
-        android:padding="5dp" android:weightSum="1">
-    	<TabWidget 
-    		android:id="@android:id/tabs"
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"/>
-    	<FrameLayout 
-    		android:id="@android:id/tabcontent" 
-    		android:layout_height="match_parent" 
-    		android:layout_width="fill_parent" 
-    		android:padding="5dp"
-    		android:layout_weight="0.54" >
-    		<RelativeLayout android:id="@+id/relativeLayout1" android:layout_height="match_parent" android:layout_width="match_parent">
+
+    		<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android" android:id="@+id/relativeLayout1" android:layout_height="match_parent" android:layout_width="match_parent">
     			<Button android:layout_centerHorizontal="true" android:layout_width="wrap_content" android:text="Video Library" android:layout_marginBottom="46dp" android:id="@+id/btnVideoLib2" android:layout_alignParentBottom="true" android:layout_height="wrap_content"></Button>
     			<Button android:layout_centerHorizontal="true" android:layout_width="wrap_content" android:text="Start Data Table Test" android:layout_marginBottom="18dp" android:layout_above="@+id/btnVideoLib2" android:id="@+id/button1" android:layout_height="wrap_content"></Button>
-    			<TextView android:textAppearance="?android:attr/textAppearanceLarge" android:id="@+id/textView1" android:layout_width="wrap_content" android:text="A: Feed Pump" android:layout_height="wrap_content" android:layout_alignParentTop="true" android:layout_alignParentLeft="true" android:layout_marginLeft="25dp" android:layout_marginTop="15dp"></TextView>
-    			<ProgressBar android:id="@+id/progressBar1" android:layout_width="250dp" style="?android:attr/progressBarStyleHorizontal" android:layout_height="wrap_content" android:layout_below="@+id/textView1" android:layout_alignParentLeft="true" android:layout_marginLeft="25dp"></ProgressBar>
-    			<TextView android:textAppearance="?android:attr/textAppearanceLarge" android:id="@+id/textView2" android:layout_width="wrap_content" android:text="B: Media Filter" android:layout_height="wrap_content" android:layout_below="@+id/progressBar1" android:layout_alignParentLeft="true" android:layout_marginLeft="25dp"></TextView>
-    			<ProgressBar android:id="@+id/progressBar2" android:layout_width="250dp" style="?android:attr/progressBarStyleHorizontal" android:layout_height="wrap_content" android:layout_below="@+id/textView2" android:layout_alignParentLeft="true" android:layout_marginLeft="25dp"></ProgressBar>
-    			<TextView android:textAppearance="?android:attr/textAppearanceLarge" android:id="@+id/textView3" android:layout_width="wrap_content" android:text="C: Cartridges" android:layout_height="wrap_content" android:layout_below="@+id/progressBar2" android:layout_alignParentLeft="true" android:layout_marginLeft="25dp"></TextView>
-    			<ProgressBar android:id="@+id/progressBar3" android:layout_width="250dp" style="?android:attr/progressBarStyleHorizontal" android:layout_height="wrap_content" android:layout_below="@+id/textView3" android:layout_alignParentLeft="true" android:layout_marginLeft="25dp"></ProgressBar>
-    			<TextView android:textAppearance="?android:attr/textAppearanceLarge" android:id="@+id/textView4" android:layout_width="wrap_content" android:text="D: Motor" android:layout_height="wrap_content" android:layout_below="@+id/progressBar3" android:layout_alignParentLeft="true" android:layout_marginLeft="25dp"></TextView>
-    			<ProgressBar android:id="@+id/progressBar4" android:layout_width="250dp" style="?android:attr/progressBarStyleHorizontal" android:layout_height="wrap_content" android:layout_below="@+id/textView4" android:layout_alignParentLeft="true" android:layout_marginLeft="25dp"></ProgressBar>
+    			<TextView android:id="@+id/textView1" android:textAppearance="?android:attr/textAppearanceLarge" android:text="A: Feed Pump" android:layout_height="wrap_content" android:layout_width="wrap_content" android:layout_alignParentTop="true" android:layout_alignParentLeft="true" android:layout_marginLeft="26dp" android:layout_marginTop="116dp"></TextView>
+    			<ProgressBar android:layout_height="wrap_content" android:layout_width="250dp" style="?android:attr/progressBarStyleHorizontal" android:id="@+id/progressBar1" android:layout_below="@+id/textView1" android:layout_alignParentLeft="true" android:layout_marginLeft="26dp"></ProgressBar>
+    			<TextView android:id="@+id/textView2" android:textAppearance="?android:attr/textAppearanceLarge" android:text="B: Media Filter" android:layout_height="wrap_content" android:layout_width="wrap_content" android:layout_below="@+id/progressBar1" android:layout_alignParentLeft="true" android:layout_marginLeft="26dp"></TextView>
+    			<ProgressBar android:layout_height="wrap_content" android:layout_width="250dp" style="?android:attr/progressBarStyleHorizontal" android:id="@+id/progressBar2" android:layout_below="@+id/textView2" android:layout_alignParentLeft="true" android:layout_marginLeft="26dp"></ProgressBar>
+    			<TextView android:id="@+id/textView3" android:textAppearance="?android:attr/textAppearanceLarge" android:text="C: Cartridges" android:layout_height="wrap_content" android:layout_width="wrap_content" android:layout_below="@+id/progressBar2" android:layout_alignParentLeft="true" android:layout_marginLeft="26dp"></TextView>
+    			<ProgressBar android:layout_height="wrap_content" android:layout_width="250dp" style="?android:attr/progressBarStyleHorizontal" android:id="@+id/progressBar3" android:layout_below="@+id/textView3" android:layout_alignParentLeft="true" android:layout_marginLeft="26dp"></ProgressBar>
+    			<TextView android:id="@+id/textView4" android:textAppearance="?android:attr/textAppearanceLarge" android:text="D: Motor" android:layout_height="wrap_content" android:layout_width="wrap_content" android:layout_below="@+id/progressBar3" android:layout_alignParentLeft="true" android:layout_marginLeft="26dp"></TextView>
+    			<ProgressBar android:layout_height="wrap_content" android:layout_width="250dp" style="?android:attr/progressBarStyleHorizontal" android:id="@+id/progressBar4" android:layout_below="@+id/textView4" android:layout_alignParentLeft="true" android:layout_marginLeft="26dp"></ProgressBar>
+    			<TextView android:id="@+id/status_indicator" android:layout_height="75dp" android:layout_width="300dp" android:layout_alignParentTop="true" android:layout_centerHorizontal="true" android:layout_marginTop="33dp"></TextView>
     		</RelativeLayout>
-    	</FrameLayout>
-    </LinearLayout>
-</TabHost>
+ 
