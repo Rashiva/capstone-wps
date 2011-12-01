@@ -15,36 +15,32 @@ public final class R {
         public static final int ic_tab_artists_grey=0x7f020001;
         public static final int ic_tab_artists_white=0x7f020002;
         public static final int icon=0x7f020003;
-        public static final int wps_tab=0x7f020004;
     }
     public static final class id {
-        public static final int btnVLA=0x7f050012;
-        public static final int btnVLB=0x7f050011;
-        public static final int btnVLBack=0x7f050013;
-        public static final int btnVLC=0x7f050010;
-        public static final int btnVLD=0x7f05000f;
-        public static final int btnVidBack=0x7f05000e;
-        public static final int btnVideoLib=0x7f050002;
-        public static final int btnVideoLib2=0x7f050003;
-        public static final int button1=0x7f050004;
-        public static final int imageView1=0x7f050001;
-        public static final int progressBar1=0x7f050006;
-        public static final int progressBar2=0x7f050008;
-        public static final int progressBar3=0x7f05000a;
-        public static final int progressBar4=0x7f05000c;
+        public static final int btnVLA=0x7f050011;
+        public static final int btnVLB=0x7f050010;
+        public static final int btnVLBack=0x7f050012;
+        public static final int btnVLC=0x7f05000f;
+        public static final int btnVLD=0x7f05000e;
+        public static final int btnVidBack=0x7f05000d;
+        public static final int btnVideoLib2=0x7f050001;
+        public static final int button1=0x7f050002;
+        public static final int progressBar1=0x7f050005;
+        public static final int progressBar2=0x7f050007;
+        public static final int progressBar3=0x7f050009;
+        public static final int progressBar4=0x7f05000b;
         public static final int relativeLayout1=0x7f050000;
-        public static final int textView1=0x7f050005;
-        public static final int textView2=0x7f050007;
-        public static final int textView3=0x7f050009;
-        public static final int textView4=0x7f05000b;
-        public static final int videoView1=0x7f05000d;
+        public static final int status_indicator=0x7f050004;
+        public static final int textView1=0x7f050003;
+        public static final int textView2=0x7f050006;
+        public static final int textView3=0x7f050008;
+        public static final int textView4=0x7f05000a;
+        public static final int videoView1=0x7f05000c;
     }
     public static final class layout {
-        public static final int graphical=0x7f030000;
-        public static final int main=0x7f030001;
-        public static final int progressbar=0x7f030002;
-        public static final int video=0x7f030003;
-        public static final int videolib=0x7f030004;
+        public static final int main=0x7f030000;
+        public static final int video=0x7f030001;
+        public static final int videolib=0x7f030002;
     }
     public static final class string {
         public static final int app_name=0x7f040001;

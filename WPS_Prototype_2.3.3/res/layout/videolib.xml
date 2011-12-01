@@ -5,5 +5,5 @@
         <Button android:text="B: Media Filter" android:id="@+id/btnVLB" android:layout_width="250dp" android:layout_height="wrap_content" android:layout_above="@+id/btnVLC" android:layout_alignLeft="@+id/btnVLD" android:layout_marginBottom="22dp"></Button>
         <Button android:text="A: Feed Pump" android:id="@+id/btnVLA" android:layout_width="250dp" android:layout_height="wrap_content" android:layout_above="@+id/btnVLB" android:layout_alignLeft="@+id/btnVLB" android:layout_marginBottom="28dp"></Button>
         <Button android:text="C: Cartridges" android:id="@+id/btnVLC" android:layout_width="250dp" android:layout_height="wrap_content" android:layout_centerVertical="true" android:layout_alignLeft="@+id/btnVLB"></Button>
-        <Button android:text="Back to Status" android:id="@+id/btnVLBack" android:layout_width="250dp" android:layout_height="wrap_content" android:layout_alignParentBottom="true" android:layout_alignLeft="@+id/btnVLD" android:layout_marginBottom="38dp"></Button>
+        <Button android:layout_height="wrap_content" android:text="Back to Status" android:layout_width="250dp" android:id="@+id/btnVLBack" android:layout_below="@+id/btnVLD" android:layout_alignLeft="@+id/btnVLD" android:layout_marginTop="55dp"></Button>
     </RelativeLayout>
