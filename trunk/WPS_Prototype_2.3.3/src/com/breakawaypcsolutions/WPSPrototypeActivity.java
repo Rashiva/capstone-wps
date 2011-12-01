@@ -14,23 +14,59 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.Gravity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ProgressBar;
-import android.widget.TextView;
-import android.graphics.PorterDuff;
+import android.graphics.*;
+import android.graphics.drawable.*;
+import android.graphics.drawable.shapes.RoundRectShape;
+
 
 public class WPSPrototypeActivity extends Activity {
     /** Called when the activity is first created. */
+	
+	ShapeDrawable pgDrawable1, pgDrawable2, pgDrawable3, pgDrawable4;
+	
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.progressbar);
+        setContentView(R.layout.main);
         
-        TextView status = (TextView) findViewById(R.id.status_indicator);
-        status.getBackground().setColorFilter(0xFF00FF00, PorterDuff.Mode.MULTIPLY);
+        Button status = (Button) findViewById(R.id.status_indicator);
+        status.getBackground().setColorFilter(0xff00ff00, PorterDuff.Mode.MULTIPLY);
+               
+        ProgressBar pb1 = (ProgressBar) findViewById(R.id.progressBar1);
+		ProgressBar pb2 = (ProgressBar) findViewById(R.id.progressBar2);
+		ProgressBar pb3 = (ProgressBar) findViewById(R.id.progressBar3);
+		ProgressBar pb4 = (ProgressBar) findViewById(R.id.progressBar4);
+			
+		final float[] roundedCorners = new float[] { 5, 5, 5, 5, 5, 5, 5, 5 }; 
+		
+		pgDrawable1 = new ShapeDrawable(new RoundRectShape(roundedCorners, null,null)); 
+		pgDrawable1.getPaint().setColor(0xffff0000); 
+		pgDrawable2 = new ShapeDrawable(new RoundRectShape(roundedCorners, null,null)); 
+		pgDrawable2.getPaint().setColor(0xffff0000); 
+		pgDrawable3 = new ShapeDrawable(new RoundRectShape(roundedCorners, null,null)); 
+		pgDrawable3.getPaint().setColor(0xffff0000); 
+		pgDrawable4 = new ShapeDrawable(new RoundRectShape(roundedCorners, null,null)); 
+		pgDrawable4.getPaint().setColor(0xffff0000);
+    
+		ClipDrawable progress1 = new ClipDrawable(pgDrawable1, Gravity.LEFT, ClipDrawable.HORIZONTAL); 
+		ClipDrawable progress2 = new ClipDrawable(pgDrawable2, Gravity.LEFT, ClipDrawable.HORIZONTAL); 
+		ClipDrawable progress3 = new ClipDrawable(pgDrawable3, Gravity.LEFT, ClipDrawable.HORIZONTAL); 
+		ClipDrawable progress4 = new ClipDrawable(pgDrawable4, Gravity.LEFT, ClipDrawable.HORIZONTAL);
+     
+		pb1.setProgressDrawable(progress1);    
+		pb1.setBackgroundDrawable(getResources().getDrawable(android.R.drawable.progress_horizontal)); 
+		pb2.setProgressDrawable(progress2);    
+		pb2.setBackgroundDrawable(getResources().getDrawable(android.R.drawable.progress_horizontal)); 
+		pb3.setProgressDrawable(progress3);    
+		pb3.setBackgroundDrawable(getResources().getDrawable(android.R.drawable.progress_horizontal)); 
+		pb4.setProgressDrawable(progress4);    
+		pb4.setBackgroundDrawable(getResources().getDrawable(android.R.drawable.progress_horizontal)); 
         
-        Button next = (Button) findViewById(R.id.btnVideoLib2);
+  	   Button next = (Button) findViewById(R.id.btnVideoLib2);
   	   next.setOnClickListener(new View.OnClickListener() {
   	       public void onClick(View view) {
   	           Intent myIntent = new Intent(view.getContext(), WPSVideoLibrary.class);
@@ -48,13 +84,11 @@ public class WPSPrototypeActivity extends Activity {
  				public void run() {
  	      		
  	    	   			// Update Progress Bars
- 	    	   			ProgressBar pbFeedPump = (ProgressBar) findViewById(R.id.progressBar1);
- 	    	   			ProgressBar pbMediaFilter = (ProgressBar) findViewById(R.id.progressBar2);
- 	    	   			ProgressBar pbCartridges = (ProgressBar) findViewById(R.id.progressBar3);
- 	    	   			ProgressBar pbMotor = (ProgressBar) findViewById(R.id.progressBar4);
- 	    	   			
- 	    	   			
- 	    	   			
+ 	    	   			ProgressBar pb1 = (ProgressBar) findViewById(R.id.progressBar1);
+ 	    	   			ProgressBar pb2 = (ProgressBar) findViewById(R.id.progressBar2);
+ 	    	   			ProgressBar pb3 = (ProgressBar) findViewById(R.id.progressBar3);
+ 	    	   			ProgressBar pb4 = (ProgressBar) findViewById(R.id.progressBar4);
+  	   			
  	    	   			// Save/Generate Data Table
  	    	   			saveToMemory();
  	    	   			
@@ -62,10 +96,27 @@ public class WPSPrototypeActivity extends Activity {
  	    	   			int[] data = loadFromMemory();
  	      		   
  	    	   			// Update Progress Bars
- 	    	   			pbFeedPump.setProgress(data[0]);
- 	    	   			pbMediaFilter.setProgress(data[1]);
- 	    	   			pbCartridges.setProgress(data[2]);
- 	    	   			pbMotor.setProgress(data[3]);		
+ 	    	   			if(data[0] < 50)
+ 	    	   				pgDrawable1.getPaint().setColor(0xffff0000); 
+ 	    	   			else
+ 	    	   				pgDrawable1.getPaint().setColor(0xff00ff00); 
+ 	    	   			if(data[1] < 50)
+ 	    	   				pgDrawable2.getPaint().setColor(0xffff0000); 
+ 	    	   			else
+ 	    	   				pgDrawable2.getPaint().setColor(0xff00ff00); 
+ 	    	   			if(data[2] < 50)
+ 	    	   				pgDrawable3.getPaint().setColor(0xffff0000); 
+ 	    	   			else
+ 	    	   				pgDrawable3.getPaint().setColor(0xff00ff00);
+ 	    	   			if(data[3] < 50)
+	    	   				pgDrawable4.getPaint().setColor(0xffff0000); 
+	    	   			else
+	    	   				pgDrawable4.getPaint().setColor(0xff00ff00);
+ 	    	   			
+ 	    	   			pb1.setProgress(data[0]);
+ 	    	   			pb2.setProgress(data[1]);
+ 	    	   			pb3.setProgress(data[2]);
+ 	    	   			pb4.setProgress(data[3]);	
  				} 
   	    	  };
   	    	  
@@ -167,5 +218,5 @@ public class WPSPrototypeActivity extends Activity {
  		
  		return data;
  	}
-    
+
 }
