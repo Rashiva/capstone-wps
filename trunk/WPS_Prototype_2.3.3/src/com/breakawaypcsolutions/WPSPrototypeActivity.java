@@ -14,6 +14,7 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
 import android.widget.Button;
@@ -32,6 +33,8 @@ public class WPSPrototypeActivity extends Activity {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.main);
+        
+		Log.v("whatever", (getFilesDir()).getAbsolutePath());
         
         Button status = (Button) findViewById(R.id.status_indicator);
         status.getBackground().setColorFilter(0xff00ff00, PorterDuff.Mode.MULTIPLY);
@@ -171,7 +174,7 @@ public class WPSPrototypeActivity extends Activity {
  			FileInputStream fin = openFileInput ("DataTable.rpe");
  			DataInputStream in = new DataInputStream(fin);
  			BufferedReader br = new BufferedReader(new InputStreamReader(in));
- 		
+ 
  			String[] mySplit = new String[2];
  			String header;
  			String strLine;
