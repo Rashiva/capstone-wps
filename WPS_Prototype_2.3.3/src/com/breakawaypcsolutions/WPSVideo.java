@@ -2,6 +2,7 @@ package com.breakawaypcsolutions;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.graphics.PixelFormat;
 import android.media.MediaPlayer;
 import android.net.Uri;
 import android.os.Bundle;
@@ -17,21 +18,13 @@ public class WPSVideo extends Activity {
 
         setContentView(R.layout.video);
         
-        VideoView videoView = (VideoView) findViewById(R.id.videoView1);
-        /*MediaController mediaController = new MediaController(this);
-        mediaController.setAnchorView(videoView);
-        videoView.setVideoPath("C:/User/Alex/Facebook.3gp");
-        videoView.setMediaController(new MediaController(this));
-        videoView.requestFocus();
-        videoView.start();*/
+        VideoView mVideoView = (VideoView) findViewById(R.id.videoView1);
+
         try{
-        MediaPlayer mp=new MediaPlayer();
-        SurfaceHolder holder = videoView.getHolder();
-        mp.setDataSource("C:/User/Alex/Facebook.3gp"); 
-        mp.setScreenOnWhilePlaying(true); 
-        mp.setDisplay(holder); 
-        mp.prepare(); 
-        mp.start();
+        	String path = "/sdcard/sample_mpeg4.mp4";
+            mVideoView.setVideoPath(path);
+            mVideoView.setMediaController(new MediaController(this));
+            mVideoView.start();
         }catch(Exception e){}
         
   	   Button next = (Button) findViewById(R.id.btnVidBack);
