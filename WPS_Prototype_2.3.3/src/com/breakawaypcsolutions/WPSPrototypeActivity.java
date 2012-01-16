@@ -19,6 +19,7 @@ import android.view.Gravity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ProgressBar;
+import android.widget.TextView;
 import android.graphics.*;
 import android.graphics.drawable.*;
 import android.graphics.drawable.shapes.RoundRectShape;
@@ -28,16 +29,17 @@ public class WPSPrototypeActivity extends Activity {
     /** Called when the activity is first created. */
 	
 	ShapeDrawable pgDrawable1, pgDrawable2, pgDrawable3, pgDrawable4;
+	boolean sysStatus = false;
 	
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.main);
+        setContentView(R.layout.progressbar);
         
 		Log.v("whatever", (getFilesDir()).getAbsolutePath());
         
-        Button status = (Button) findViewById(R.id.status_indicator);
-        status.getBackground().setColorFilter(0xff00ff00, PorterDuff.Mode.MULTIPLY);
+     //   Button status = (Button) findViewById(R.id.status_indicator);
+     //   status.getBackground().setColorFilter(0xff00ff00, PorterDuff.Mode.MULTIPLY);
                
         ProgressBar pb1 = (ProgressBar) findViewById(R.id.progressBar1);
 		ProgressBar pb2 = (ProgressBar) findViewById(R.id.progressBar2);
@@ -75,7 +77,23 @@ public class WPSPrototypeActivity extends Activity {
   	           Intent myIntent = new Intent(view.getContext(), WPSVideoLibrary.class);
   	           startActivityForResult(myIntent, 0);
   	       }
-  	   });	
+  	   });
+  	   
+  	   Button pwr = (Button) findViewById(R.id.btnPwr);
+  	   pwr.setOnClickListener(new View.OnClickListener() {
+  	       public void onClick(View view) {
+  	    	   TextView txtPwr = (TextView) findViewById(R.id.txtPwr);
+  	           if(!sysStatus) {
+  	        	   sysStatus = !sysStatus;
+  	        	   txtPwr.setTextColor(Color.RED);
+  	        	   txtPwr.setText("OFF");
+  	           } else {
+  	        	   sysStatus = !sysStatus;
+  	        	   txtPwr.setTextColor(Color.GREEN);
+  	        	   txtPwr.setText("ON");
+  	           }
+  	       }
+  	   });
   	   
   	   Button dtTest = (Button) findViewById(R.id.button1);
   	   dtTest.setOnClickListener(new View.OnClickListener() {

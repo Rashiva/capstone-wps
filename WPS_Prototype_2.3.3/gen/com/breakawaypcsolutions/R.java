@@ -18,12 +18,13 @@ public final class R {
         public static final int wps_tab=0x7f020004;
     }
     public static final class id {
-        public static final int btnVLA=0x7f060011;
-        public static final int btnVLB=0x7f060010;
-        public static final int btnVLBack=0x7f060012;
-        public static final int btnVLC=0x7f06000f;
-        public static final int btnVLD=0x7f06000e;
-        public static final int btnVidBack=0x7f06000d;
+        public static final int btnPwr=0x7f06000c;
+        public static final int btnVLA=0x7f060013;
+        public static final int btnVLB=0x7f060012;
+        public static final int btnVLBack=0x7f060014;
+        public static final int btnVLC=0x7f060011;
+        public static final int btnVLD=0x7f060010;
+        public static final int btnVidBack=0x7f06000f;
         public static final int btnVideoLib2=0x7f060001;
         public static final int button1=0x7f060002;
         public static final int progressBar1=0x7f060005;
@@ -36,7 +37,8 @@ public final class R {
         public static final int textView2=0x7f060006;
         public static final int textView3=0x7f060008;
         public static final int textView4=0x7f06000a;
-        public static final int videoView1=0x7f06000c;
+        public static final int txtPwr=0x7f06000d;
+        public static final int videoView1=0x7f06000e;
     }
     public static final class layout {
         public static final int main=0x7f030000;
