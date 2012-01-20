@@ -18,6 +18,7 @@ import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.graphics.*;
@@ -84,14 +85,17 @@ public class WPSPrototypeActivity extends Activity {
   	       }
   	   });
   	   
+  	   final ImageView feed_pump = (ImageView) findViewById(R.id.imageView1);
   	   pwr.setOnClickListener(new View.OnClickListener() {
   	       public void onClick(View view) {
   	           if(sysStatus == 0) {
   	        	   sysStatus = 1;
+  	        	   feed_pump.setImageResource(R.drawable.green_check);
   	        	   pwr.getBackground().setColorFilter(0xff00ff00, PorterDuff.Mode.MULTIPLY);
   	        	   pwr.setText("Power: ON");
   	           } else {
   	        	   sysStatus = 0;
+  	        	   feed_pump.setImageResource(R.drawable.red_x);
   	        	   pwr.getBackground().setColorFilter(0xffff0000, PorterDuff.Mode.MULTIPLY);
 	        	   pwr.setText("Power: OFF");
   	           }
