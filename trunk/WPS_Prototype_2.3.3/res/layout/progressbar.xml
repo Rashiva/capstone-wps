@@ -1,8 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 
     		<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android" android:id="@+id/relativeLayout1" android:layout_height="match_parent" android:layout_width="match_parent">
-    			<Button android:id="@+id/btnPwr" android:text="Power: OFF" android:layout_width="300dp" android:layout_alignParentTop="true" android:layout_centerHorizontal="true" android:layout_marginTop="16dp" android:layout_height="75dp"></Button>
-    			<Button android:id="@+id/btnVideoLib2" android:text="Video Library" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_below="@+id/progressBar3" android:layout_alignRight="@+id/textView2" android:layout_marginTop="60dp"></Button>
+    			<Button android:id="@+id/btnPwr" android:text="Power: OFF" android:textAppearance="?android:attr/textAppearanceLarge" android:layout_width="300dp" android:layout_alignParentTop="true" android:layout_centerHorizontal="true" android:layout_marginTop="16dp" android:layout_height="75dp"></Button>
     			<TextView android:id="@+id/textView1" android:layout_height="wrap_content" android:textAppearance="?android:attr/textAppearanceLarge" android:text="A: Filters" android:layout_width="wrap_content" android:layout_below="@+id/btnPwr" android:layout_alignLeft="@+id/btnPwr" android:layout_marginLeft="17dp" android:layout_marginTop="90dp"></TextView>
     			<ProgressBar android:layout_height="wrap_content" android:id="@+id/progressBar1" android:layout_width="250dp" style="?android:attr/progressBarStyleHorizontal" android:layout_below="@+id/textView1" android:layout_alignLeft="@+id/btnPwr" android:layout_marginLeft="17dp"></ProgressBar>
     			<TextView android:id="@+id/textView2" android:layout_height="wrap_content" android:textAppearance="?android:attr/textAppearanceLarge" android:text="B: R/O Membrane" android:layout_width="wrap_content" android:layout_below="@+id/progressBar1" android:layout_alignLeft="@+id/btnPwr" android:layout_marginLeft="17dp"></TextView>
@@ -11,5 +10,6 @@
     			<ProgressBar android:layout_height="wrap_content" android:id="@+id/progressBar3" android:layout_width="250dp" style="?android:attr/progressBarStyleHorizontal" android:layout_below="@+id/textView3" android:layout_alignLeft="@+id/progressBar2"></ProgressBar>
     			<TextView android:textAppearance="?android:attr/textAppearanceLarge" android:layout_height="wrap_content" android:text="Feed Pump In Water" android:id="@+id/textView4" android:layout_width="wrap_content" android:layout_below="@+id/btnPwr" android:layout_alignLeft="@+id/textView1" android:layout_marginTop="28dp"></TextView>
     			<ImageView android:layout_height="wrap_content" android:id="@+id/imageView1" android:layout_width="wrap_content" android:src="@drawable/red_x" android:layout_alignTop="@+id/textView4" android:layout_toRightOf="@+id/textView4" android:layout_marginLeft="14dp"></ImageView>
+    			<Button android:text="Video Library" android:layout_width="wrap_content" android:layout_height="wrap_content" android:id="@+id/btnVideoLib2" android:layout_below="@+id/progressBar3" android:layout_alignRight="@+id/textView2" android:layout_marginTop="43dp"></Button>
     		</RelativeLayout>
  
