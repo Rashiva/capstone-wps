@@ -7,6 +7,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.ObjectOutputStream;
+import java.util.Random;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -31,7 +32,7 @@ public class WPSPrototypeActivity extends Activity {
 	
 	ShapeDrawable pgDrawable1, pgDrawable2, pgDrawable3, pgDrawable4;
 	int sysStatus = 0; // 0 = Off, 1 = On, 2 = Override
-	int feedPumpStatus = 0; //0 = Out of Water, 1 = In Water
+	int feedPumpStatus = 1; //0 = Out of Water, 1 = In Water
 	
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -78,7 +79,7 @@ public class WPSPrototypeActivity extends Activity {
        	   	  pwr.setText("Power: OVERRIDE");
           }
           
-          final ImageView feed_pump = (ImageView) findViewById(R.id.imageView1);
+          ImageView feed_pump = (ImageView) findViewById(R.id.imageView1);
           if(feedPumpStatus == 1)
 	   		{
 	   			feed_pump.setImageResource(R.drawable.green_check);
@@ -130,17 +131,6 @@ public class WPSPrototypeActivity extends Activity {
   	   			int[] data = loadFromMemory();
   	   			
   	   			sysStatus = data[0];
-  	   			
-	  	   		if(sysStatus == 0) {
-	          	  pwr.getBackground().setColorFilter(0xffff0000, PorterDuff.Mode.MULTIPLY);
-	         	   	  pwr.setText("Power: OFF");
-	            } else if (sysStatus == 1) {
-	          	  pwr.getBackground().setColorFilter(0xff00ff00, PorterDuff.Mode.MULTIPLY);
-	          	  pwr.setText("Power: ON");
-	            } else {
-	          	  pwr.getBackground().setColorFilter(0xffffff00, PorterDuff.Mode.MULTIPLY);
-	         	   	  pwr.setText("Power: OVERRIDE");
-	            }
 	  	   		
 	  	   		feedPumpStatus = data[1];
 	  	   		
@@ -179,7 +169,7 @@ public class WPSPrototypeActivity extends Activity {
  	
  	public void saveToMemory() 
  	{
- 		int feedPump = (int)(Math.random());
+ 		int feedPump = 0;
  		int filters = (int)(Math.random()*100);
  		int roMembrane = (int)(Math.random()*100);
  		int waterPurity = (int)(Math.random()*100);
@@ -211,10 +201,11 @@ public class WPSPrototypeActivity extends Activity {
  	{
  		
  		int data[] = new int[5];
- 		//data[0] = 75;
- 		//data[1] = 75;
- 		//data[2] = 75;
- 		//data[3] = 75;
+ 		data[0] = 0;
+ 		data[1] = 0;
+ 		data[2] = 75;
+ 		data[3] = 75;
+ 		data[4] = 75;
  		
  		try
  		{
