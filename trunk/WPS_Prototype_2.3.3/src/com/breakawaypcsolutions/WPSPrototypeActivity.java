@@ -31,8 +31,8 @@ public class WPSPrototypeActivity extends Activity {
     /** Called when the activity is first created. */
 	
 	ShapeDrawable pgDrawable1, pgDrawable2, pgDrawable3, pgDrawable4;
-	int sysStatus = 0; // 0 = Off, 1 = On, 2 = Override
-	int feedPumpStatus = 1; //0 = Out of Water, 1 = In Water
+	int sysStatus = 1; // 0 = Off, 1 = On, 2 = Override
+	int feedPumpStatus = 0; //0 = Out of Water, 1 = In Water
 	
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -141,8 +141,8 @@ public class WPSPrototypeActivity extends Activity {
 	  	   		else
 	  	   		{
 	  	   			feed_pump.setImageResource(R.drawable.red_x);
-	  	   		}
-    		   
+	  	   		} 
+	  	   		
   	   			// Update Progress Bars
   	   			if(data[2] < 50)
   	   				pgDrawable1.getPaint().setColor(0xffff0000); 
@@ -163,12 +163,14 @@ public class WPSPrototypeActivity extends Activity {
 			} 
    	  };
    	  
-  	  new Timer().scheduleAtFixedRate(task, 4000, 4000);
+  	  new Timer().scheduleAtFixedRate(task, 6000, 6000);
   	   
  	}
  	
  	public void saveToMemory() 
  	{
+ 		Random r = new Random();
+ 		//int feedPump = r.nextInt(1);
  		int feedPump = 0;
  		int filters = (int)(Math.random()*100);
  		int roMembrane = (int)(Math.random()*100);
@@ -266,5 +268,5 @@ public class WPSPrototypeActivity extends Activity {
  		
  		return data;
  	}
-
+	
 }
