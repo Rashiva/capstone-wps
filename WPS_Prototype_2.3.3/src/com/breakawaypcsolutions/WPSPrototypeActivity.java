@@ -33,6 +33,7 @@ public class WPSPrototypeActivity extends Activity {
 	ShapeDrawable pgDrawable1, pgDrawable2, pgDrawable3, pgDrawable4;
 	int sysStatus = 1; // 0 = Off, 1 = On, 2 = Override
 	int feedPumpStatus = 0; //0 = Out of Water, 1 = In Water
+	int interfaceTest;
 	
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -40,8 +41,42 @@ public class WPSPrototypeActivity extends Activity {
         setContentView(R.layout.progressbar);
         
 		Log.v("whatever", (getFilesDir()).getAbsolutePath());
-		
 		final Button pwr = (Button) findViewById(R.id.btnPwr);
+		
+		///////////////////////////////// INTERFACE /////////////////////////////////
+		
+		
+		// Create TCP server
+				Server server = null;
+				try
+				{
+					server = new Server(4567);
+					server.start();
+				} catch (IOException e)
+				{
+					Log.e("interface", "Unable to start TCP server", e);
+					System.exit(-1);
+				}
+				
+				server.addListener(new AbstractServerListener() {
+					
+					@Override
+					public void onReceive(Client client, byte[] data)
+					{
+						
+						if (data.length<2) return;
+						
+						interfaceTest = (data[0] & 0xff) | ((data[1] & 0xff) << 8);
+						pwr.setText(interfaceTest);
+					};
+					
+				});
+
+		///////////////////////////////////////////////////////////////////////////////
+		
+		
+		
+		
 		pwr.getBackground().setColorFilter(0xffff0000, PorterDuff.Mode.MULTIPLY);
                
         ProgressBar pb1 = (ProgressBar) findViewById(R.id.progressBar1);
@@ -70,13 +105,13 @@ public class WPSPrototypeActivity extends Activity {
 		
           if(sysStatus == 0) {
         	  pwr.getBackground().setColorFilter(0xffff0000, PorterDuff.Mode.MULTIPLY);
-       	   	  pwr.setText("Power: OFF");
+       //	   	  pwr.setText("Power: OFF");
           } else if (sysStatus == 1) {
         	  pwr.getBackground().setColorFilter(0xff00ff00, PorterDuff.Mode.MULTIPLY);
-        	  pwr.setText("Power: ON");
+       // 	  pwr.setText("Power: ON");
           } else {
         	  pwr.getBackground().setColorFilter(0xffffff00, PorterDuff.Mode.MULTIPLY);
-       	   	  pwr.setText("Power: OVERRIDE");
+      // 	   	  pwr.setText("Power: OVERRIDE");
           }
           
           ImageView feed_pump = (ImageView) findViewById(R.id.imageView1);
