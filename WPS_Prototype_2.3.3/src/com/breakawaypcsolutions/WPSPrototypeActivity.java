@@ -55,7 +55,7 @@ public class WPSPrototypeActivity extends Activity {
 				} catch (IOException e)
 				{
 					Log.e("interface", "Unable to start TCP server", e);
-					System.exit(-1);
+					//System.exit(-1);
 				}
 				
 				server.addListener(new AbstractServerListener() {
