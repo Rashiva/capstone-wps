@@ -83,7 +83,12 @@ public class Server
 	public void start() throws IOException
 	{
 		keepAlive = true;
-		serverSocket = new ServerSocket(port);
+		
+		try {
+			serverSocket = new ServerSocket(port);
+		} catch (IOException e) {
+			
+		}
 		
 		(listenThread = new Thread(){
 			public void run()
