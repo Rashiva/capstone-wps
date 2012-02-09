@@ -43,45 +43,12 @@ public class WPSPrototypeActivity extends Activity {
 		Log.v("whatever", (getFilesDir()).getAbsolutePath());
 		final Button pwr = (Button) findViewById(R.id.btnPwr);
 		
-		///////////////////////////////// INTERFACE /////////////////////////////////
-		
-		
-		// Create TCP server
-				Server server = null;
-				try
-				{
-					server = new Server(4567);
-					server.start();
-				} catch (IOException e)
-				{
-					Log.e("interface", "Unable to start TCP server", e);
-					//System.exit(-1);
-				}
-				
-				server.addListener(new AbstractServerListener() {
-					
-					@Override
-					public void onReceive(Client client, byte[] data)
-					{
-						
-						if (data.length<2) return;
-						
-						interfaceTest = (data[0] & 0xff) | ((data[1] & 0xff) << 8);
-						pwr.setText(interfaceTest);
-					};
-					
-				});
-
-		///////////////////////////////////////////////////////////////////////////////
-		
-		
-		
-		
 		pwr.getBackground().setColorFilter(0xffff0000, PorterDuff.Mode.MULTIPLY);
                
-        ProgressBar pb1 = (ProgressBar) findViewById(R.id.progressBar1);
-		ProgressBar pb2 = (ProgressBar) findViewById(R.id.progressBar2);
-		ProgressBar pb3 = (ProgressBar) findViewById(R.id.progressBar3);
+        final ProgressBar pb1 = (ProgressBar) findViewById(R.id.progressBar1);
+		final ProgressBar pb2 = (ProgressBar) findViewById(R.id.progressBar2);
+		final ProgressBar pb3 = (ProgressBar) findViewById(R.id.progressBar3);
+		final ProgressBar pb4 = (ProgressBar) findViewById(R.id.progressBar4);
 			
 		final float[] roundedCorners = new float[] { 5, 5, 5, 5, 5, 5, 5, 5 }; 
 		
@@ -91,10 +58,13 @@ public class WPSPrototypeActivity extends Activity {
 		pgDrawable2.getPaint().setColor(0xffff0000); 
 		pgDrawable3 = new ShapeDrawable(new RoundRectShape(roundedCorners, null,null)); 
 		pgDrawable3.getPaint().setColor(0xffff0000); 
+		pgDrawable4 = new ShapeDrawable(new RoundRectShape(roundedCorners, null,null)); 
+		pgDrawable4.getPaint().setColor(0xffff0000); 
     
 		ClipDrawable progress1 = new ClipDrawable(pgDrawable1, Gravity.LEFT, ClipDrawable.HORIZONTAL); 
 		ClipDrawable progress2 = new ClipDrawable(pgDrawable2, Gravity.LEFT, ClipDrawable.HORIZONTAL); 
 		ClipDrawable progress3 = new ClipDrawable(pgDrawable3, Gravity.LEFT, ClipDrawable.HORIZONTAL); 
+		ClipDrawable progress4 = new ClipDrawable(pgDrawable4, Gravity.LEFT, ClipDrawable.HORIZONTAL); 
      
 		pb1.setProgressDrawable(progress1);    
 		pb1.setBackgroundDrawable(getResources().getDrawable(android.R.drawable.progress_horizontal)); 
@@ -102,16 +72,18 @@ public class WPSPrototypeActivity extends Activity {
 		pb2.setBackgroundDrawable(getResources().getDrawable(android.R.drawable.progress_horizontal)); 
 		pb3.setProgressDrawable(progress3);    
 		pb3.setBackgroundDrawable(getResources().getDrawable(android.R.drawable.progress_horizontal)); 
+		pb4.setProgressDrawable(progress4);    
+		pb4.setBackgroundDrawable(getResources().getDrawable(android.R.drawable.progress_horizontal)); 
 		
           if(sysStatus == 0) {
         	  pwr.getBackground().setColorFilter(0xffff0000, PorterDuff.Mode.MULTIPLY);
-       //	   	  pwr.setText("Power: OFF");
+       	   	  pwr.setText("Power: OFF");
           } else if (sysStatus == 1) {
         	  pwr.getBackground().setColorFilter(0xff00ff00, PorterDuff.Mode.MULTIPLY);
-       // 	  pwr.setText("Power: ON");
+        	  pwr.setText("Power: ON");
           } else {
         	  pwr.getBackground().setColorFilter(0xffffff00, PorterDuff.Mode.MULTIPLY);
-      // 	   	  pwr.setText("Power: OVERRIDE");
+      	   	  pwr.setText("Power: OVERRIDE");
           }
           
           ImageView feed_pump = (ImageView) findViewById(R.id.imageView1);
@@ -132,7 +104,6 @@ public class WPSPrototypeActivity extends Activity {
   	       }
   	   });
   	   
-  	   
   	   pwr.setOnClickListener(new View.OnClickListener() {
   	       public void onClick(View view) {
   	           if(sysStatus == 0) {
@@ -147,7 +118,7 @@ public class WPSPrototypeActivity extends Activity {
   	       }
   	   });
   	   
-  	 TimerTask task = new TimerTask()
+  	 final TimerTask task = new TimerTask()
    	  {
 			@Override
 			public void run() {
@@ -158,6 +129,7 @@ public class WPSPrototypeActivity extends Activity {
   	   			ProgressBar pb1 = (ProgressBar) findViewById(R.id.progressBar1);
   	   			ProgressBar pb2 = (ProgressBar) findViewById(R.id.progressBar2);
   	   			ProgressBar pb3 = (ProgressBar) findViewById(R.id.progressBar3);
+  	   			ProgressBar pb4 = (ProgressBar) findViewById(R.id.progressBar4);
   			
   	   			// Save/Generate Data Table
   	   			saveToMemory();
@@ -191,14 +163,45 @@ public class WPSPrototypeActivity extends Activity {
   	   				pgDrawable3.getPaint().setColor(0xffff0000); 
   	   			else
   	   				pgDrawable3.getPaint().setColor(0xff00ff00);
+  	   			if(data[5] < 50)
+	   				pgDrawable4.getPaint().setColor(0xffff0000); 
+	   			else
+	   				pgDrawable4.getPaint().setColor(0xff00ff00); 
   	   			
   	   			pb1.setProgress(data[2]);
   	   			pb2.setProgress(data[3]);
-  	   			pb3.setProgress(data[4]);	
+  	   			pb3.setProgress(data[4]);
+  	   			pb4.setProgress(data[5]);
 			} 
    	  };
    	  
   	  new Timer().scheduleAtFixedRate(task, 6000, 6000);
+  	  
+	  Button test1 = (Button) findViewById(R.id.btnTest1);
+	  test1.setOnClickListener(new View.OnClickListener() {
+	       public void onClick(View view) {
+	         // Filters Fail Test
+	       task.cancel();
+	       }
+	   });
+	   
+		
+	   Button test2 = (Button) findViewById(R.id.btnTest2);
+	   test2.setOnClickListener(new View.OnClickListener() {
+	       public void onClick(View view) {
+	           // Membrane Fail Test
+	    	   task.cancel();
+	       }
+	   });
+	   
+		
+	   Button test3 = (Button) findViewById(R.id.btnTest3);
+	   test3.setOnClickListener(new View.OnClickListener() {
+	       public void onClick(View view) {
+	           // Water Purity Fail Test
+	    	   task.cancel();
+	       }
+	   }); 
   	   
  	}
  	
@@ -210,6 +213,7 @@ public class WPSPrototypeActivity extends Activity {
  		int filters = (int)(Math.random()*100);
  		int roMembrane = (int)(Math.random()*100);
  		int waterPurity = (int)(Math.random()*100);
+ 		int voltage = (int)(Math.random()*100);
  		
  		try
  		{
@@ -223,6 +227,7 @@ public class WPSPrototypeActivity extends Activity {
          	oos.writeBytes("Filters " + filters + "\n"); //Filters: Percentage value 0 - 100
          	oos.writeBytes("ROMembrane " + roMembrane + "\n"); //R/O Membrane: Percentage value 0 - 100
          	oos.writeBytes("WaterPurity " + waterPurity + "\n"); //Water Purity: Percentage value 0 - 100
+         	oos.writeBytes("Voltage " + voltage + "\n"); //Voltage: Percentage value 0 - 100 (KORY NEEDS TO FIX THIS: Change to realistic values)
          	
          	oos.close();
          	fos.close();
@@ -233,16 +238,16 @@ public class WPSPrototypeActivity extends Activity {
          }
  		}
  	
- 	
  	public int[] loadFromMemory()
  	{
  		
- 		int data[] = new int[5];
+ 		int data[] = new int[6];
  		data[0] = 0;
  		data[1] = 0;
  		data[2] = 75;
  		data[3] = 75;
  		data[4] = 75;
+ 		data[5] = 75;
  		
  		try
  		{
@@ -291,6 +296,13 @@ public class WPSPrototypeActivity extends Activity {
  			strLine = mySplit[0];
  			value = Integer.parseInt(mySplit[1]);
  			data[4] = value;
+ 			
+ 			//Voltage
+ 			strLine = br.readLine();
+ 			mySplit = strLine.split("\\s+");
+ 			strLine = mySplit[0];
+ 			value = Integer.parseInt(mySplit[1]);
+ 			data[5] = value;
  		
  			in.close();
  			
@@ -303,5 +315,6 @@ public class WPSPrototypeActivity extends Activity {
  		
  		return data;
  	}
-	
+ 	
+ 	
 }
