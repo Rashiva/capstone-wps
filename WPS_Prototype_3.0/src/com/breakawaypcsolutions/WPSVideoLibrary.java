@@ -15,8 +15,7 @@ public class WPSVideoLibrary extends Activity {
  	   Button next = (Button) findViewById(R.id.btnVLBack);
  	   next.setOnClickListener(new View.OnClickListener() {
  	       public void onClick(View view) {
- 	           Intent myIntent = new Intent(view.getContext(), WPS_Prototype_3Activity.class);
- 	           startActivityForResult(myIntent, 0);
+ 	           finish();
  	       }
  	   }); 
  	   
