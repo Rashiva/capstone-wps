@@ -42,6 +42,10 @@ public class WPS_Prototype_3Activity extends Activity {
 	int pos2 = 1;
 	int pos3 = 1;
 	int pos4 = 0;
+	int filterTest = 0;
+	int membraneTest = 0;
+	int voltageTest = 0;
+	int waterPurityTest = 0;
 	
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -133,45 +137,138 @@ public class WPS_Prototype_3Activity extends Activity {
   	   			
   	   			sysStatus = data[0];
 	  	   		
-  	   			// Update Progress Bars
-  	   			if(data[2] <= 20)
-  	   				pgDrawable1.getPaint().setColor(0xffff0000); 
-  	   			else if (data[2] <= 50)
-  	   				pgDrawable1.getPaint().setColor(0xffffff00);
-  	   			else
-  	   				pgDrawable1.getPaint().setColor(0xff00ff00); 
-  	   			if(data[3] <= 20)
-  	   				pgDrawable2.getPaint().setColor(0xffff0000); 
-  	   			else if (data[3] <= 50)
-	   				pgDrawable2.getPaint().setColor(0xffffff00);
-  	   			else
-  	   				pgDrawable2.getPaint().setColor(0xff00ff00); 
-  	   			if(data[4] <= 20)
-  	   				pgDrawable3.getPaint().setColor(0xffff0000);
-  	   			else if (data[4] <= 50)
-	   				pgDrawable3.getPaint().setColor(0xffffff00);
-  	   			else
-  	   				pgDrawable3.getPaint().setColor(0xff00ff00);
-  	   			if(data[5] <= 20)
-	   				pgDrawable4.getPaint().setColor(0xffff0000); 
-  	   			else if (data[5] <= 50)
-	   				pgDrawable4.getPaint().setColor(0xffffff00);
-	   			else
-	   				pgDrawable4.getPaint().setColor(0xff00ff00); 
-  	   			
-  	   			if(feedPumpStatus == 0)
+  	   	// Update Progress Bars
+  	   			if(filterTest == 0) 
   	   			{
-	  	   			pb1.setProgress(0);
-		   			pb2.setProgress(0);
-		   			pb3.setProgress(0);
-		   			pb4.setProgress(0);
+  	   				// Normal Operation
+  	   				if(data[2] <= 20)
+  	   					pgDrawable1.getPaint().setColor(0xffff0000); 
+  	   				else if (data[2] <= 50)
+  	   					pgDrawable1.getPaint().setColor(0xffffff00);
+  	   				else
+  	   					pgDrawable1.getPaint().setColor(0xff00ff00); 
+  	   				
+  	  	   			if(feedPumpStatus == 0)
+  	  	   			{
+  		  	   			pb1.setProgress(0);
+  			   			data[2] = 90;
+  	  	   			}
+  	  	   			else
+  	  	   			{
+  		  	   			pb1.setProgress(data[2]);
+  	  	   			}
+  	   			}
+  	   			else 
+  	   			{
+  	   				// Filter Fail Test Case
+  	   				if(pb1.getProgress() > 10) 	// Stall at 10
+  	   					pb1.setProgress(pb1.getProgress()-10);
+
+  	   				if(pb1.getProgress() <= 20)
+	   					pgDrawable1.getPaint().setColor(0xffff0000);
+	   				else if (pb1.getProgress() <= 50)
+	   					pgDrawable1.getPaint().setColor(0xffffff00);
+	   				else
+	   					pgDrawable1.getPaint().setColor(0xff00ff00);
+  	   			} 
+  	   			if(membraneTest == 0)
+  	   			{
+  	   				//Normal Operation
+  	   				if(data[3] <= 20)
+  	   					pgDrawable2.getPaint().setColor(0xffff0000); 
+  	   				else if (data[3] <= 50)
+  	   					pgDrawable2.getPaint().setColor(0xffffff00);
+  	   				else
+  	   					pgDrawable2.getPaint().setColor(0xff00ff00); 
+  	   				
+  	  	   			if(feedPumpStatus == 0)
+  	  	   			{
+  		  	   			pb2.setProgress(0);
+  			   			data[3] = 93;
+  	  	   			}
+  	  	   			else
+  	  	   			{
+  		  	   			pb2.setProgress(data[3]);
+  	  	   			}
   	   			}
   	   			else
   	   			{
-	  	   			pb1.setProgress(data[2]);
-	  	   			pb2.setProgress(data[3]);
-	  	   			pb3.setProgress(data[4]);
-	  	   			pb4.setProgress(data[5]);
+  	   				// Membrane Fail Test Case
+  	   				if(pb2.getProgress() > 10)
+  	   					pb2.setProgress(pb2.getProgress()-10);
+
+  	   				if(pb2.getProgress() <= 20)
+	   					pgDrawable2.getPaint().setColor(0xffff0000);
+	   				else if (pb2.getProgress() <= 50)
+	   					pgDrawable2.getPaint().setColor(0xffffff00);
+	   				else
+	   					pgDrawable2.getPaint().setColor(0xff00ff00);
+  	   			}
+  	   			if(voltageTest == 0)
+  	   			{
+  	   				// Normal Operation
+  	   				if(data[4] <= 20)
+  	   					pgDrawable3.getPaint().setColor(0xffff0000);
+  	   				else if (data[4] <= 50)
+  	   					pgDrawable3.getPaint().setColor(0xffffff00);
+  	   				else
+  	   					pgDrawable3.getPaint().setColor(0xff00ff00);
+  	   				
+  	  	   			if(feedPumpStatus == 0)
+  	  	   			{
+  		  	   			pb3.setProgress(0);
+  			   			data[4] = 97;
+  	  	   			}
+  	  	   			else
+  	  	   			{
+  		  	   			pb3.setProgress(data[4]);
+  	  	   			}
+  	   			}
+  	   			else
+  	   			{		
+  	   				// Voltage Fail Test Case
+  	   				if(pb3.getProgress() > 10)
+  	   					pb3.setProgress(pb3.getProgress()-10);
+
+  	   				if(pb3.getProgress() <= 20)
+	   					pgDrawable3.getPaint().setColor(0xffff0000);
+	   				else if (pb3.getProgress() <= 50)
+	   					pgDrawable3.getPaint().setColor(0xffffff00);
+	   				else
+	   					pgDrawable3.getPaint().setColor(0xff00ff00);
+  	   			}
+  	   			if(waterPurityTest == 0)
+  	   			{
+  	   				// Normal Operation
+  	   				if(data[5] <= 20)
+  	   					pgDrawable4.getPaint().setColor(0xffff0000); 
+  	   				else if (data[5] <= 50)
+  	   					pgDrawable4.getPaint().setColor(0xffffff00);
+  	   				else
+  	   					pgDrawable4.getPaint().setColor(0xff00ff00); 
+  	   				
+  	  	   			if(feedPumpStatus == 0)
+  	  	   			{
+  		  	   			pb4.setProgress(0);
+  			   			data[5] = 100;
+  	  	   			}
+  	  	   			else
+  	  	   			{
+  		  	   			pb4.setProgress(data[5]);
+  	  	   			}
+  	   			}
+  	   			else
+  	   			{
+  	   				// Fail Test Case
+  	   				if(pb4.getProgress() > 10)
+  	   					pb4.setProgress(pb4.getProgress()-10);
+
+  	   				if(pb4.getProgress() <= 20)
+	   					pgDrawable4.getPaint().setColor(0xffff0000);
+	   				else if (pb4.getProgress() <= 50)
+	   					pgDrawable4.getPaint().setColor(0xffffff00);
+	   				else
+	   					pgDrawable4.getPaint().setColor(0xff00ff00);
   	   			}
 			} 
 			
@@ -188,6 +285,10 @@ public class WPS_Prototype_3Activity extends Activity {
  	        	   feedPumpStatus = 1;
  	        	   ImageView feed_pump = (ImageView) findViewById(R.id.imageView1);
  	        	   feed_pump.setImageResource(R.drawable.green_check);
+ 	        	   filterTest = 0;
+ 	        	   membraneTest = 0;
+ 	        	   voltageTest = 0;
+ 	        	   waterPurityTest = 0;
  	           } else {
  	        	   sysStatus = 0;
  	        	   pwr.getBackground().setColorFilter(0xffff0000, PorterDuff.Mode.MULTIPLY);
@@ -207,31 +308,39 @@ public class WPS_Prototype_3Activity extends Activity {
  	       }
  	   });
   	  
-	  Button test1 = (Button) findViewById(R.id.btnTest1);
-	  test1.setOnClickListener(new View.OnClickListener() {
-	       public void onClick(View view) {
-	         // Filters Fail Test
-	       task.cancel();
-	       }
-	   });
-	   
-		
-	   Button test2 = (Button) findViewById(R.id.btnTest2);
-	   test2.setOnClickListener(new View.OnClickListener() {
-	       public void onClick(View view) {
-	           // Membrane Fail Test
-	    	   task.cancel();
-	       }
-	   });
-	   
-		
-	   Button test3 = (Button) findViewById(R.id.btnTest3);
-	   test3.setOnClickListener(new View.OnClickListener() {
-	       public void onClick(View view) {
-	           // Water Purity Fail Test
-	    	   task.cancel();
-	       }
-	   }); 
+ 	  Button test1 = (Button) findViewById(R.id.btnTest1);
+ 	  test1.setOnClickListener(new View.OnClickListener() {
+ 	       public void onClick(View view) {
+ 	         // Filters Fail Test
+ 	         filterTest = 1;
+ 	       }
+ 	   });
+ 	   
+ 		
+ 	   Button test2 = (Button) findViewById(R.id.btnTest2);
+ 	   test2.setOnClickListener(new View.OnClickListener() {
+ 	       public void onClick(View view) {
+ 	           // Membrane Fail Test
+ 	    	   membraneTest = 1;
+ 	       }
+ 	   });
+ 	   
+ 		
+ 	   Button test3 = (Button) findViewById(R.id.btnTest3);
+ 	   test3.setOnClickListener(new View.OnClickListener() {
+ 	       public void onClick(View view) {
+ 	           // Voltage Fail Test
+ 	    	   voltageTest = 1;
+ 	       }
+ 	   }); 
+ 	   
+ 	   Button test4 = (Button) findViewById(R.id.btnTest4);
+ 	   test4.setOnClickListener(new View.OnClickListener() {
+ 	       public void onClick(View view) {
+ 	           // Water Purity Fail Test
+ 	    	   waterPurityTest = 1;
+ 	       }
+ 	   }); 
   	   
  	}
  	
