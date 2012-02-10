@@ -1,15 +1,123 @@
 <?xml version="1.0" encoding="utf-8"?>
+    		<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    		    android:id="@+id/relativeLayout1"
+    		    android:layout_width="match_parent"
+    		    android:layout_height="match_parent" >
 
-    		<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android" android:id="@+id/relativeLayout1" android:layout_height="match_parent" android:layout_width="match_parent">
-    			<Button android:id="@+id/btnPwr" android:layout_height="150dp" android:text="Power: OFF" android:layout_width="500dp" android:textAppearance="?android:attr/textAppearanceLarge" android:layout_alignParentTop="true" android:layout_centerHorizontal="true" android:layout_marginTop="39dp" android:textSize="40sp"></Button>
-    			<Button android:id="@+id/btnVideoLib2" android:textSize="40sp" android:layout_height="wrap_content" android:text="Video Library" android:layout_width="wrap_content" android:layout_alignParentBottom="true" android:layout_centerHorizontal="true" android:layout_marginBottom="117dp"></Button>
-    			<TextView android:text="B: R/O Membrane" android:textSize="40sp" android:layout_height="wrap_content" android:id="@+id/textView2" android:layout_width="wrap_content" android:textAppearance="?android:attr/textAppearanceLarge" android:layout_below="@+id/progressBar1" android:layout_alignLeft="@+id/progressBar1" android:layout_marginTop="64dp"></TextView>
-    			<ProgressBar android:id="@+id/progressBar2" android:layout_height="30dp" android:layout_width="250dp" style="?android:attr/progressBarStyleHorizontal" android:layout_below="@+id/textView2" android:layout_alignLeft="@+id/progressBar1" android:layout_alignRight="@+id/progressBar1"></ProgressBar>
-    			<ImageView android:id="@+id/imageView1" android:src="@drawable/red_x" android:layout_alignBottom="@+id/textView4" android:layout_alignRight="@+id/btnPwr" android:layout_width="60dp" android:layout_height="60dp"></ImageView>
-    			<TextView android:text="Feed Pump In Water" android:textSize="40sp" android:layout_height="wrap_content" android:id="@+id/textView4" android:layout_width="wrap_content" android:textAppearance="?android:attr/textAppearanceLarge" android:layout_below="@+id/btnPwr" android:layout_alignLeft="@+id/btnPwr" android:layout_marginTop="150dp"></TextView>
-    			<TextView android:text="A: Filters" android:layout_height="wrap_content" android:id="@+id/textView1" android:layout_width="wrap_content" android:textAppearance="?android:attr/textAppearanceLarge" android:layout_below="@+id/textView4" android:layout_alignLeft="@+id/textView4" android:layout_marginTop="87dp" android:textSize="40sp"></TextView>
-    			<ProgressBar android:id="@+id/progressBar1" android:layout_height="30dp" android:layout_width="wrap_content" style="?android:attr/progressBarStyleHorizontal" android:layout_below="@+id/textView1" android:layout_alignLeft="@+id/textView1" android:layout_alignRight="@+id/imageView1"></ProgressBar>
-    			<TextView android:text="Water Purity" android:textSize="40sp" android:layout_height="wrap_content" android:id="@+id/textView3" android:layout_width="wrap_content" android:textAppearance="?android:attr/textAppearanceLarge" android:layout_below="@+id/progressBar2" android:layout_alignLeft="@+id/progressBar2" android:layout_marginTop="140dp"></TextView>
-    			<ProgressBar android:id="@+id/progressBar3" android:layout_height="30dp" android:layout_width="250dp" style="?android:attr/progressBarStyleHorizontal" android:layout_below="@+id/textView3" android:layout_alignLeft="@+id/progressBar2" android:layout_alignRight="@+id/progressBar2"></ProgressBar>
+    		    <Button
+    		        android:id="@+id/btnPwr"
+    		        android:layout_width="500dp"
+    		        android:layout_height="150dp"
+    		        android:layout_marginTop="39dp"
+    		        android:layout_x="121dp"
+    		        android:layout_y="68dp"
+    		        android:text="Power: OFF"
+    		        android:textAppearance="?android:attr/textAppearanceLarge"
+    		        android:textSize="40sp" />
+
+    		    <Button
+    		        android:id="@+id/btnVideoLib2"
+    		        android:layout_width="wrap_content"
+    		        android:layout_height="96dp"
+    		        android:layout_marginBottom="117dp"
+    		        android:layout_x="259dp"
+    		        android:layout_y="948dp"
+    		        android:text="Video Library"
+    		        android:textSize="40sp" />
+
+    		    <TextView
+    		        android:id="@+id/textView3"
+    		        android:layout_width="wrap_content"
+    		        android:layout_height="wrap_content"
+    		        android:layout_marginTop="140dp"
+    		        android:layout_x="98dp"
+    		        android:layout_y="784dp"
+    		        android:text="Water Purity"
+    		        android:textAppearance="?android:attr/textAppearanceLarge"
+    		        android:textSize="40sp" />
+
+    		    <ProgressBar
+    		        android:id="@+id/progressBar4"
+    		        style="?android:attr/progressBarStyleHorizontal"
+    		        android:layout_width="554dp"
+    		        android:layout_height="30dp"
+    		        android:layout_x="94dp"
+    		        android:layout_y="840dp" />
+
+    		    <TextView
+    		        android:id="@+id/textView4"
+    		        android:layout_width="wrap_content"
+    		        android:layout_height="wrap_content"
+    		        android:layout_x="98dp"
+    		        android:layout_y="668dp"
+    		        android:text="Voltage"
+    		        android:textAppearance="?android:attr/textAppearanceLarge"
+    		        android:textSize="40sp" />
+
+    		    <ProgressBar
+    		        android:id="@+id/progressBar3"
+    		        style="?android:attr/progressBarStyleHorizontal"
+    		        android:layout_width="554dp"
+    		        android:layout_height="30dp"
+    		        android:layout_x="94dp"
+    		        android:layout_y="720dp" />
+
+    		    <ProgressBar
+    		        android:id="@+id/progressBar1"
+    		        style="?android:attr/progressBarStyleHorizontal"
+    		        android:layout_width="554dp"
+    		        android:layout_height="30dp"
+    		        android:layout_x="94dp"
+    		        android:layout_y="560dp" />
+
+    		    <ProgressBar
+    		        android:id="@+id/progressBar2"
+    		        style="?android:attr/progressBarStyleHorizontal"
+    		        android:layout_width="554dp"
+    		        android:layout_height="30dp"
+    		        android:layout_x="94dp"
+    		        android:layout_y="444dp" />
+
+    		    <TextView
+    		        android:id="@+id/textView1"
+    		        android:layout_width="180dp"
+    		        android:layout_height="wrap_content"
+    		        android:layout_marginTop="87dp"
+    		        android:layout_x="98dp"
+    		        android:layout_y="399dp"
+    		        android:text="A: Filters"
+    		        android:textAppearance="?android:attr/textAppearanceLarge"
+    		        android:textSize="40sp" />
+
+    		    <TextView
+    		        android:id="@+id/textView2"
+    		        android:layout_width="wrap_content"
+    		        android:layout_height="wrap_content"
+    		        android:layout_marginTop="64dp"
+    		        android:layout_x="98dp"
+    		        android:layout_y="519dp"
+    		        android:text="B: R/O Membrane"
+    		        android:textAppearance="?android:attr/textAppearanceLarge"
+    		        android:textSize="40sp" />
+
+    		    <TextView
+    		        android:id="@+id/textView4"
+    		        android:layout_width="wrap_content"
+    		        android:layout_height="wrap_content"
+    		        android:layout_marginTop="150dp"
+    		        android:layout_x="91dp"
+    		        android:layout_y="301dp"
+    		        android:text="Feed Pump In Water"
+    		        android:textAppearance="?android:attr/textAppearanceLarge"
+    		        android:textSize="40sp" />
+
+    		    <ImageView
+    		        android:id="@+id/imageView1"
+    		        android:layout_width="123dp"
+    		        android:layout_height="80dp"
+    		        android:layout_x="527dp"
+    		        android:layout_y="290dp"
+    		        android:src="@drawable/red_x" />
+
     		</RelativeLayout>
  

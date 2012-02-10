@@ -45,6 +45,7 @@ public class WPS_Prototype_3Activity extends Activity {
         ProgressBar pb1 = (ProgressBar) findViewById(R.id.progressBar1);
 		ProgressBar pb2 = (ProgressBar) findViewById(R.id.progressBar2);
 		ProgressBar pb3 = (ProgressBar) findViewById(R.id.progressBar3);
+		ProgressBar pb4 = (ProgressBar) findViewById(R.id.progressBar4);
 			
 		final float[] roundedCorners = new float[] { 5, 5, 5, 5, 5, 5, 5, 5 }; 
 		
@@ -53,11 +54,14 @@ public class WPS_Prototype_3Activity extends Activity {
 		pgDrawable2 = new ShapeDrawable(new RoundRectShape(roundedCorners, null,null)); 
 		pgDrawable2.getPaint().setColor(0xffff0000); 
 		pgDrawable3 = new ShapeDrawable(new RoundRectShape(roundedCorners, null,null)); 
-		pgDrawable3.getPaint().setColor(0xffff0000); 
+		pgDrawable3.getPaint().setColor(0xffff0000);
+		pgDrawable4 = new ShapeDrawable(new RoundRectShape(roundedCorners, null,null)); 
+		pgDrawable4.getPaint().setColor(0xffff0000);
     
 		ClipDrawable progress1 = new ClipDrawable(pgDrawable1, Gravity.LEFT, ClipDrawable.HORIZONTAL); 
 		ClipDrawable progress2 = new ClipDrawable(pgDrawable2, Gravity.LEFT, ClipDrawable.HORIZONTAL); 
 		ClipDrawable progress3 = new ClipDrawable(pgDrawable3, Gravity.LEFT, ClipDrawable.HORIZONTAL); 
+		ClipDrawable progress4 = new ClipDrawable(pgDrawable4, Gravity.LEFT, ClipDrawable.HORIZONTAL);
      
 		pb1.setProgressDrawable(progress1);    
 		pb1.setBackgroundDrawable(getResources().getDrawable(android.R.drawable.progress_horizontal)); 
@@ -65,6 +69,8 @@ public class WPS_Prototype_3Activity extends Activity {
 		pb2.setBackgroundDrawable(getResources().getDrawable(android.R.drawable.progress_horizontal)); 
 		pb3.setProgressDrawable(progress3);    
 		pb3.setBackgroundDrawable(getResources().getDrawable(android.R.drawable.progress_horizontal)); 
+		pb4.setProgressDrawable(progress4);    
+		pb4.setBackgroundDrawable(getResources().getDrawable(android.R.drawable.progress_horizontal));
 		
           if(sysStatus == 0) {
         	  pwr.getBackground().setColorFilter(0xffff0000, PorterDuff.Mode.MULTIPLY);
@@ -111,6 +117,7 @@ public class WPS_Prototype_3Activity extends Activity {
   	   			ProgressBar pb1 = (ProgressBar) findViewById(R.id.progressBar1);
   	   			ProgressBar pb2 = (ProgressBar) findViewById(R.id.progressBar2);
   	   			ProgressBar pb3 = (ProgressBar) findViewById(R.id.progressBar3);
+  	   			ProgressBar pb4 = (ProgressBar) findViewById(R.id.progressBar4);
   			
   	   			// Save/Generate Data Table
   	   			saveToMemory();
@@ -119,22 +126,35 @@ public class WPS_Prototype_3Activity extends Activity {
   	   			int[] data = loadFromMemory();
     		   
   	   			// Update Progress Bars
-  	   			if(data[0] < 50)
-  	   				pgDrawable1.getPaint().setColor(0xffff0000); 
-  	   			else
-  	   				pgDrawable1.getPaint().setColor(0xff00ff00); 
-  	   			if(data[1] < 50)
-  	   				pgDrawable2.getPaint().setColor(0xffff0000); 
-  	   			else
-  	   				pgDrawable2.getPaint().setColor(0xff00ff00); 
-  	   			if(data[2] < 50)
-  	   				pgDrawable3.getPaint().setColor(0xffff0000); 
-  	   			else
-  	   				pgDrawable3.getPaint().setColor(0xff00ff00);
+  	   			if(data[0] <= 20)
+	   				pgDrawable1.getPaint().setColor(0xffff0000); 
+	   			else if (data[0] <= 50)
+	   				pgDrawable1.getPaint().setColor(0xffffff00);
+	   			else
+	   				pgDrawable1.getPaint().setColor(0xff00ff00); 
+	   			if(data[1] <= 20)
+	   				pgDrawable2.getPaint().setColor(0xffff0000); 
+	   			else if (data[1] <= 50)
+	   				pgDrawable2.getPaint().setColor(0xffffff00);
+	   			else
+	   				pgDrawable2.getPaint().setColor(0xff00ff00); 
+	   			if(data[2] <= 20)
+	   				pgDrawable3.getPaint().setColor(0xffff0000);
+	   			else if (data[2] <= 50)
+	   				pgDrawable3.getPaint().setColor(0xffffff00);
+	   			else
+	   				pgDrawable3.getPaint().setColor(0xff00ff00);
+	   			if(data[3] <= 20)
+	   				pgDrawable4.getPaint().setColor(0xffff0000); 
+	   			else if (data[3] <= 50)
+	   				pgDrawable4.getPaint().setColor(0xffffff00);
+   			else
+   					pgDrawable4.getPaint().setColor(0xff00ff00);
   	   			
   	   			pb1.setProgress(data[0]);
   	   			pb2.setProgress(data[1]);
   	   			pb3.setProgress(data[2]);	
+  	   			pb4.setProgress(data[3]);
 			} 
    	  };
    	  
@@ -144,10 +164,10 @@ public class WPS_Prototype_3Activity extends Activity {
  	
  	public void saveToMemory() 
  	{
- 		int feedPump = (int)(Math.random()*100);
- 		int mediaFilter = (int)(Math.random()*100);
- 		int cartridges = (int)(Math.random()*100);
- 		int motor = (int)(Math.random()*100);
+ 		int filters = (int)(Math.random()*100);
+ 		int membrane = (int)(Math.random()*100);
+ 		int voltage = (int)(Math.random()*100);
+ 		int purity = (int)(Math.random()*100);
  		
  		try
  		{
@@ -156,10 +176,10 @@ public class WPS_Prototype_3Activity extends Activity {
          	oos.writeBytes("*Data_Table*\n");
          	
          	//Data Table
-         	oos.writeBytes("FeedPump " + feedPump + "\n");
-         	oos.writeBytes("MediaFilter " + mediaFilter + "\n");
-         	oos.writeBytes("Cartridges " + cartridges + "\n");
-         	oos.writeBytes("Motor " + motor + "\n");
+         	oos.writeBytes("Filters " + filters + "\n");
+         	oos.writeBytes("Membrane " + membrane + "\n");
+         	oos.writeBytes("Voltage " + voltage + "\n");
+         	oos.writeBytes("Purity " + purity + "\n");
          	
          	oos.close();
          	fos.close();
@@ -193,28 +213,28 @@ public class WPS_Prototype_3Activity extends Activity {
  		
  			header = br.readLine(); //ignore this data
  		
- 			//Feed Pump
+ 			//Filters
  			strLine = br.readLine();
  			mySplit = strLine.split("\\s+");
  			strLine = mySplit[0];
  			value = Integer.parseInt(mySplit[1]);
  			data[0] = value;
  		
- 			//Media Filter
+ 			//Membrane
  			strLine = br.readLine();
  			mySplit = strLine.split("\\s+");
  			strLine = mySplit[0];
  			value = Integer.parseInt(mySplit[1]);
  			data[1] = value;
  		
- 			//Cartridges
+ 			//Voltage
  			strLine = br.readLine();
  			mySplit = strLine.split("\\s+");
  			strLine = mySplit[0];
  			value = Integer.parseInt(mySplit[1]);
  			data[2] = value;
  		
- 			//Motor
+ 			//Water Purity
  			strLine = br.readLine();
  			mySplit = strLine.split("\\s+");
  			strLine = mySplit[0];

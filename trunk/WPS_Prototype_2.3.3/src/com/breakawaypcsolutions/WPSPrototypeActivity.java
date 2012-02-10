@@ -31,9 +31,13 @@ public class WPSPrototypeActivity extends Activity {
     /** Called when the activity is first created. */
 	
 	ShapeDrawable pgDrawable1, pgDrawable2, pgDrawable3, pgDrawable4;
-	int sysStatus = 1; // 0 = Off, 1 = On, 2 = Override
+	int sysStatus = 0; // 0 = Off, 1 = On, 2 = Override
 	int feedPumpStatus = 0; //0 = Out of Water, 1 = In Water
 	int interfaceTest;
+	int filters = 90;
+	int roMembrane = 70;
+	int waterPurity = 82;
+	int voltage = 100;
 	
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -104,20 +108,6 @@ public class WPSPrototypeActivity extends Activity {
   	       }
   	   });
   	   
-  	   pwr.setOnClickListener(new View.OnClickListener() {
-  	       public void onClick(View view) {
-  	           if(sysStatus == 0) {
-  	        	   sysStatus = 1;
-  	        	   pwr.getBackground().setColorFilter(0xff00ff00, PorterDuff.Mode.MULTIPLY);
-  	        	   pwr.setText("Power: ON");
-  	           } else {
-  	        	   sysStatus = 0;
-  	        	   pwr.getBackground().setColorFilter(0xffff0000, PorterDuff.Mode.MULTIPLY);
-	        	   pwr.setText("Power: OFF");
-  	           }
-  	       }
-  	   });
-  	   
   	 final TimerTask task = new TimerTask()
    	  {
 			@Override
@@ -139,43 +129,78 @@ public class WPSPrototypeActivity extends Activity {
   	   			
   	   			sysStatus = data[0];
 	  	   		
-	  	   		feedPumpStatus = data[1];
-	  	   		
-	  	   		if(feedPumpStatus == 1)
-	  	   		{
-	  	   			feed_pump.setImageResource(R.drawable.green_check);
-	  	   		}
-	  	   		else
-	  	   		{
-	  	   			feed_pump.setImageResource(R.drawable.red_x);
-	  	   		} 
-	  	   		
   	   			// Update Progress Bars
-  	   			if(data[2] < 50)
+  	   			if(data[2] <= 20)
   	   				pgDrawable1.getPaint().setColor(0xffff0000); 
+  	   			else if (data[2] <= 50)
+  	   				pgDrawable1.getPaint().setColor(0xffffff00);
   	   			else
   	   				pgDrawable1.getPaint().setColor(0xff00ff00); 
-  	   			if(data[3] < 50)
+  	   			if(data[3] <= 20)
   	   				pgDrawable2.getPaint().setColor(0xffff0000); 
+  	   			else if (data[3] <= 50)
+	   				pgDrawable2.getPaint().setColor(0xffffff00);
   	   			else
   	   				pgDrawable2.getPaint().setColor(0xff00ff00); 
-  	   			if(data[4] < 50)
-  	   				pgDrawable3.getPaint().setColor(0xffff0000); 
+  	   			if(data[4] <= 20)
+  	   				pgDrawable3.getPaint().setColor(0xffff0000);
+  	   			else if (data[4] <= 50)
+	   				pgDrawable3.getPaint().setColor(0xffffff00);
   	   			else
   	   				pgDrawable3.getPaint().setColor(0xff00ff00);
-  	   			if(data[5] < 50)
+  	   			if(data[5] <= 20)
 	   				pgDrawable4.getPaint().setColor(0xffff0000); 
+  	   			else if (data[5] <= 50)
+	   				pgDrawable4.getPaint().setColor(0xffffff00);
 	   			else
 	   				pgDrawable4.getPaint().setColor(0xff00ff00); 
   	   			
-  	   			pb1.setProgress(data[2]);
-  	   			pb2.setProgress(data[3]);
-  	   			pb3.setProgress(data[4]);
-  	   			pb4.setProgress(data[5]);
+  	   			if(sysStatus == 0)
+  	   			{
+	  	   			pb1.setProgress(0);
+		   			pb2.setProgress(0);
+		   			pb3.setProgress(0);
+		   			pb4.setProgress(0);
+  	   			}
+  	   			else
+  	   			{
+	  	   			pb1.setProgress(data[2]);
+	  	   			pb2.setProgress(data[3]);
+	  	   			pb3.setProgress(data[4]);
+	  	   			pb4.setProgress(data[5]);
+  	   			}
 			} 
    	  };
+  	  
+   	  new Timer().scheduleAtFixedRate(task, 0, 1500);
    	  
-  	  new Timer().scheduleAtFixedRate(task, 6000, 6000);
+ 	   pwr.setOnClickListener(new View.OnClickListener() {
+ 		   public void onClick(View view) {
+ 	           if(sysStatus == 0) {
+ 	        	   sysStatus = 1;
+ 	        	   pwr.getBackground().setColorFilter(0xff00ff00, PorterDuff.Mode.MULTIPLY);
+ 	        	   pwr.setText("Power: ON");
+ 	        	   feedPumpStatus = 1;
+ 	        	   ImageView feed_pump = (ImageView) findViewById(R.id.imageView1);
+ 	        	   feed_pump.setImageResource(R.drawable.green_check);
+ 	           } else {
+ 	        	   sysStatus = 0;
+ 	        	   pwr.getBackground().setColorFilter(0xffff0000, PorterDuff.Mode.MULTIPLY);
+	        	   pwr.setText("Power: OFF");
+	        	   feedPumpStatus = 0;
+	        	   ImageView feed_pump = (ImageView) findViewById(R.id.imageView1);
+ 	        	   feed_pump.setImageResource(R.drawable.red_x);
+ 	        	   ProgressBar pb1 = (ProgressBar) findViewById(R.id.progressBar1);
+ 	  	   			ProgressBar pb2 = (ProgressBar) findViewById(R.id.progressBar2);
+ 	  	   			ProgressBar pb3 = (ProgressBar) findViewById(R.id.progressBar3);
+ 	  	   			ProgressBar pb4 = (ProgressBar) findViewById(R.id.progressBar4);
+		  	   		pb1.setProgress(0);
+		   			pb2.setProgress(0);
+		   			pb3.setProgress(0);
+		   			pb4.setProgress(0);
+ 	           }
+ 	       }
+ 	   });
   	  
 	  Button test1 = (Button) findViewById(R.id.btnTest1);
 	  test1.setOnClickListener(new View.OnClickListener() {
@@ -207,14 +232,35 @@ public class WPSPrototypeActivity extends Activity {
  	
  	public void saveToMemory() 
  	{
- 		Random r = new Random();
- 		//int feedPump = r.nextInt(1);
- 		int feedPump = 0;
- 		int filters = (int)(Math.random()*100);
- 		int roMembrane = (int)(Math.random()*100);
- 		int waterPurity = (int)(Math.random()*100);
- 		int voltage = (int)(Math.random()*100);
+ 		int dev1 = (int)(Math.random()*7)-4;
+ 		int dev2 = (int)(Math.random()*7)-4;
+ 		int dev3 = (int)(Math.random()*7)-4;
+ 		int dev4 = (int)(Math.random()*7)-4;
  		
+ 		filters = filters + dev1;
+ 		if(filters > 100)
+ 			filters = 100;
+ 		else if(filters < 0)
+ 			filters = 0;
+ 		
+ 		roMembrane = roMembrane + dev2;
+ 		if(roMembrane > 100)
+ 			roMembrane = 100;
+ 		else if(roMembrane < 0)
+ 			roMembrane = 0;
+ 		
+
+ 		voltage = voltage + dev3;
+ 		if(voltage > 100)
+ 			voltage = 100;
+ 		else if(voltage < 0)
+ 			voltage = 0;
+ 		
+ 		waterPurity = waterPurity + dev4;
+ 		if(waterPurity > 100)
+ 			waterPurity = 100;
+ 		else if(waterPurity < 0)
+ 			waterPurity = 0;
  		try
  		{
  			FileOutputStream fos = openFileOutput ("DataTable.rpe", Context.MODE_PRIVATE);
@@ -223,11 +269,11 @@ public class WPSPrototypeActivity extends Activity {
          	
          	//Data Table
          	oos.writeBytes("Power " + sysStatus + "\n"); //Power: 0 = Off, 1 = On, 2 = Override
-         	oos.writeBytes("FeedPump " + feedPump + "\n"); //Feed Pump in water: 0=Not in water, 1=In water
+         	oos.writeBytes("FeedPump " + feedPumpStatus + "\n"); //Feed Pump in water: 0=Not in water, 1=In water
          	oos.writeBytes("Filters " + filters + "\n"); //Filters: Percentage value 0 - 100
          	oos.writeBytes("ROMembrane " + roMembrane + "\n"); //R/O Membrane: Percentage value 0 - 100
+         	oos.writeBytes("Voltage " + voltage + "\n"); //Voltage: Percentage value 0 - 100
          	oos.writeBytes("WaterPurity " + waterPurity + "\n"); //Water Purity: Percentage value 0 - 100
-         	oos.writeBytes("Voltage " + voltage + "\n"); //Voltage: Percentage value 0 - 100 (KORY NEEDS TO FIX THIS: Change to realistic values)
          	
          	oos.close();
          	fos.close();
