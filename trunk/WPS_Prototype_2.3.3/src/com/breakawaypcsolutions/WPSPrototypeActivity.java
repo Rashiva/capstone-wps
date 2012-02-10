@@ -15,6 +15,7 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
@@ -35,9 +36,13 @@ public class WPSPrototypeActivity extends Activity {
 	int feedPumpStatus = 0; //0 = Out of Water, 1 = In Water
 	int interfaceTest;
 	int filters = 90;
-	int roMembrane = 70;
-	int waterPurity = 82;
+	int roMembrane = 93;
+	int waterPurity = 97;
 	int voltage = 100;
+	int pos1 = 0;
+	int pos2 = 1;
+	int pos3 = 1;
+	int pos4 = 0;
 	
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -155,12 +160,16 @@ public class WPSPrototypeActivity extends Activity {
 	   			else
 	   				pgDrawable4.getPaint().setColor(0xff00ff00); 
   	   			
-  	   			if(sysStatus == 0)
+  	   			if(feedPumpStatus == 0)
   	   			{
 	  	   			pb1.setProgress(0);
 		   			pb2.setProgress(0);
 		   			pb3.setProgress(0);
 		   			pb4.setProgress(0);
+		   			data[2] = 90;
+		   			data[3] = 93;
+		   			data[4] = 97;
+		   			data[5] = 100;
   	   			}
   	   			else
   	   			{
@@ -170,6 +179,7 @@ public class WPSPrototypeActivity extends Activity {
 	  	   			pb4.setProgress(data[5]);
   	   			}
 			} 
+			
    	  };
   	  
    	  new Timer().scheduleAtFixedRate(task, 0, 1500);
@@ -232,10 +242,43 @@ public class WPSPrototypeActivity extends Activity {
  	
  	public void saveToMemory() 
  	{
- 		int dev1 = (int)(Math.random()*7)-4;
- 		int dev2 = (int)(Math.random()*7)-4;
- 		int dev3 = (int)(Math.random()*7)-4;
- 		int dev4 = (int)(Math.random()*7)-4;
+ 		Random r = new Random();
+ 		int dev1 = r.nextInt(4);
+ 		int dev2 = r.nextInt(4);
+ 		int dev3 = r.nextInt(4);
+ 		int dev4 = r.nextInt(4);
+ 		
+ 		if(pos1 == 0)
+ 		{
+ 			pos1 = 1;
+ 			dev1 *= -1;
+ 		}
+ 		else
+ 			pos1 = 0;
+ 		
+ 		if(pos2 == 0)
+ 		{
+ 			pos2 = 1;
+ 			dev2 *= -1;
+ 		}
+ 		else
+ 			pos2 = 0;
+ 		
+ 		if(pos3 == 0)
+ 		{
+ 			pos3 = 1;
+ 			dev3 *= -1;
+ 		}
+ 		else
+ 			pos3 = 0;
+ 		
+ 		if(pos4 == 0)
+ 		{
+ 			pos4 = 1;
+ 			dev4 *= -1;
+ 		}
+ 		else
+ 			pos4 = 0;
  		
  		filters = filters + dev1;
  		if(filters > 100)
@@ -336,14 +379,14 @@ public class WPSPrototypeActivity extends Activity {
  			value = Integer.parseInt(mySplit[1]);
  			data[3] = value;
  			
- 			//Water Purity
+ 			//Voltage
  			strLine = br.readLine();
  			mySplit = strLine.split("\\s+");
  			strLine = mySplit[0];
  			value = Integer.parseInt(mySplit[1]);
  			data[4] = value;
  			
- 			//Voltage
+ 			//Water Purity
  			strLine = br.readLine();
  			mySplit = strLine.split("\\s+");
  			strLine = mySplit[0];
