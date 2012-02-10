@@ -47,6 +47,7 @@ public class WPSPrototypeActivity extends Activity {
 	int membraneTest = 0;
 	int voltageTest = 0;
 	int waterPurityTest = 0;
+	Handler handler = new Handler();
 	
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -55,6 +56,7 @@ public class WPSPrototypeActivity extends Activity {
         
 		Log.v("whatever", (getFilesDir()).getAbsolutePath());
 		final Button pwr = (Button) findViewById(R.id.btnPwr);
+		
 		
 		pwr.getBackground().setColorFilter(0xffff0000, PorterDuff.Mode.MULTIPLY);
                
@@ -108,6 +110,14 @@ public class WPSPrototypeActivity extends Activity {
 	   		{
 	   			feed_pump.setImageResource(R.drawable.red_x);
 	   		}
+          
+          final Runnable updatePowerButton = new Runnable() {
+        	   public void run() {
+        		  // Set Power Button to Override
+        		  pwr.getBackground().setColorFilter(0xffffff00, PorterDuff.Mode.MULTIPLY);
+           	   	  pwr.setText("Power: OVERRIDE");	
+        	   }
+        	};
         
   	   Button next = (Button) findViewById(R.id.btnVideoLib2);
   	   next.setOnClickListener(new View.OnClickListener() {
@@ -166,7 +176,11 @@ public class WPSPrototypeActivity extends Activity {
   	   					pb1.setProgress(pb1.getProgress()-10);
 
   	   				if(pb1.getProgress() <= 20)
+  	   				{
 	   					pgDrawable1.getPaint().setColor(0xffff0000);
+	   					handler.postDelayed(updatePowerButton, 100);
+	   					sysStatus = 2;
+  	   				}
 	   				else if (pb1.getProgress() <= 50)
 	   					pgDrawable1.getPaint().setColor(0xffffff00);
 	   				else
@@ -199,7 +213,11 @@ public class WPSPrototypeActivity extends Activity {
   	   					pb2.setProgress(pb2.getProgress()-10);
 
   	   				if(pb2.getProgress() <= 20)
+  	   				{
 	   					pgDrawable2.getPaint().setColor(0xffff0000);
+	   					handler.postDelayed(updatePowerButton, 100);
+	   					sysStatus = 2;
+  	   				}
 	   				else if (pb2.getProgress() <= 50)
 	   					pgDrawable2.getPaint().setColor(0xffffff00);
 	   				else
@@ -232,7 +250,11 @@ public class WPSPrototypeActivity extends Activity {
   	   					pb3.setProgress(pb3.getProgress()-10);
 
   	   				if(pb3.getProgress() <= 20)
+  	   				{
 	   					pgDrawable3.getPaint().setColor(0xffff0000);
+	   					handler.postDelayed(updatePowerButton, 100);
+	   					sysStatus = 2;
+  	   				}
 	   				else if (pb3.getProgress() <= 50)
 	   					pgDrawable3.getPaint().setColor(0xffffff00);
 	   				else
@@ -265,7 +287,11 @@ public class WPSPrototypeActivity extends Activity {
   	   					pb4.setProgress(pb4.getProgress()-10);
 
   	   				if(pb4.getProgress() <= 20)
+  	   				{
 	   					pgDrawable4.getPaint().setColor(0xffff0000);
+	   					handler.postDelayed(updatePowerButton, 100);
+	   					sysStatus = 2;
+  	   				}
 	   				else if (pb4.getProgress() <= 50)
 	   					pgDrawable4.getPaint().setColor(0xffffff00);
 	   				else
