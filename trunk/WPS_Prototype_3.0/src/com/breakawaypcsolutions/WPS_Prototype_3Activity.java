@@ -15,6 +15,7 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
@@ -46,6 +47,7 @@ public class WPS_Prototype_3Activity extends Activity {
 	int membraneTest = 0;
 	int voltageTest = 0;
 	int waterPurityTest = 0;
+	Handler handler = new Handler();
 	
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -107,6 +109,14 @@ public class WPS_Prototype_3Activity extends Activity {
 	   		{
 	   			feed_pump.setImageResource(R.drawable.red_x);
 	   		}
+          
+          final Runnable updatePowerButton = new Runnable() {
+       	   public void run() {
+       		  // Set Power Button to Override
+       		  pwr.getBackground().setColorFilter(0xffffff00, PorterDuff.Mode.MULTIPLY);
+          	   	  pwr.setText("Power: OVERRIDE");	
+       	   }
+       	};
         
   	   Button next = (Button) findViewById(R.id.btnVideoLib2);
   	   next.setOnClickListener(new View.OnClickListener() {
@@ -116,163 +126,179 @@ public class WPS_Prototype_3Activity extends Activity {
   	       }
   	   });
   	   
-  	 final TimerTask task = new TimerTask()
-   	  {
-			@Override
-			public void run() {
-				
-				ImageView feed_pump = (ImageView) findViewById(R.id.imageView1);
-    		
-  	   			// Update Progress Bars
-  	   			ProgressBar pb1 = (ProgressBar) findViewById(R.id.progressBar1);
-  	   			ProgressBar pb2 = (ProgressBar) findViewById(R.id.progressBar2);
-  	   			ProgressBar pb3 = (ProgressBar) findViewById(R.id.progressBar3);
-  	   			ProgressBar pb4 = (ProgressBar) findViewById(R.id.progressBar4);
-  			
-  	   			// Save/Generate Data Table
-  	   			saveToMemory();
-  	   			
-  	   			// Get Data Table
-  	   			int[] data = loadFromMemory();
-  	   			
-  	   			sysStatus = data[0];
-	  	   		
-  	   	// Update Progress Bars
-  	   			if(filterTest == 0) 
-  	   			{
-  	   				// Normal Operation
-  	   				if(data[2] <= 20)
-  	   					pgDrawable1.getPaint().setColor(0xffff0000); 
-  	   				else if (data[2] <= 50)
-  	   					pgDrawable1.getPaint().setColor(0xffffff00);
-  	   				else
-  	   					pgDrawable1.getPaint().setColor(0xff00ff00); 
-  	   				
-  	  	   			if(feedPumpStatus == 0)
-  	  	   			{
-  		  	   			pb1.setProgress(0);
-  			   			data[2] = 90;
-  	  	   			}
-  	  	   			else
-  	  	   			{
-  		  	   			pb1.setProgress(data[2]);
-  	  	   			}
-  	   			}
-  	   			else 
-  	   			{
-  	   				// Filter Fail Test Case
-  	   				if(pb1.getProgress() > 10) 	// Stall at 10
-  	   					pb1.setProgress(pb1.getProgress()-10);
+    	 final TimerTask task = new TimerTask()
+      	  {
+   			@Override
+   			public void run() {
+   				
+   				ImageView feed_pump = (ImageView) findViewById(R.id.imageView1);
+       		
+     	   			// Update Progress Bars
+     	   			ProgressBar pb1 = (ProgressBar) findViewById(R.id.progressBar1);
+     	   			ProgressBar pb2 = (ProgressBar) findViewById(R.id.progressBar2);
+     	   			ProgressBar pb3 = (ProgressBar) findViewById(R.id.progressBar3);
+     	   			ProgressBar pb4 = (ProgressBar) findViewById(R.id.progressBar4);
+     			
+     	   			// Save/Generate Data Table
+     	   			saveToMemory();
+     	   			
+     	   			// Get Data Table
+     	   			int[] data = loadFromMemory();
+     	   			
+     	   			sysStatus = data[0];
+   	  	   		
+     	   			// Update Progress Bars
+     	   			if(filterTest == 0) 
+     	   			{
+     	   				// Normal Operation
+     	   				if(data[2] <= 20)
+     	   					pgDrawable1.getPaint().setColor(0xffff0000); 
+     	   				else if (data[2] <= 50)
+     	   					pgDrawable1.getPaint().setColor(0xffffff00);
+     	   				else
+     	   					pgDrawable1.getPaint().setColor(0xff00ff00); 
+     	   				
+     	  	   			if(feedPumpStatus == 0)
+     	  	   			{
+     		  	   			pb1.setProgress(0);
+     			   			data[2] = 90;
+     	  	   			}
+     	  	   			else
+     	  	   			{
+     		  	   			pb1.setProgress(data[2]);
+     	  	   			}
+     	   			}
+     	   			else 
+     	   			{
+     	   				// Filter Fail Test Case
+     	   				if(pb1.getProgress() > 10) 	// Stall at 10
+     	   					pb1.setProgress(pb1.getProgress()-10);
 
-  	   				if(pb1.getProgress() <= 20)
-	   					pgDrawable1.getPaint().setColor(0xffff0000);
-	   				else if (pb1.getProgress() <= 50)
-	   					pgDrawable1.getPaint().setColor(0xffffff00);
-	   				else
-	   					pgDrawable1.getPaint().setColor(0xff00ff00);
-  	   			} 
-  	   			if(membraneTest == 0)
-  	   			{
-  	   				//Normal Operation
-  	   				if(data[3] <= 20)
-  	   					pgDrawable2.getPaint().setColor(0xffff0000); 
-  	   				else if (data[3] <= 50)
-  	   					pgDrawable2.getPaint().setColor(0xffffff00);
-  	   				else
-  	   					pgDrawable2.getPaint().setColor(0xff00ff00); 
-  	   				
-  	  	   			if(feedPumpStatus == 0)
-  	  	   			{
-  		  	   			pb2.setProgress(0);
-  			   			data[3] = 93;
-  	  	   			}
-  	  	   			else
-  	  	   			{
-  		  	   			pb2.setProgress(data[3]);
-  	  	   			}
-  	   			}
-  	   			else
-  	   			{
-  	   				// Membrane Fail Test Case
-  	   				if(pb2.getProgress() > 10)
-  	   					pb2.setProgress(pb2.getProgress()-10);
+     	   				if(pb1.getProgress() <= 20)
+     	   				{
+   	   					pgDrawable1.getPaint().setColor(0xffff0000);
+   	   					handler.postDelayed(updatePowerButton, 100);
+   	   					sysStatus = 2;
+     	   				}
+   	   				else if (pb1.getProgress() <= 50)
+   	   					pgDrawable1.getPaint().setColor(0xffffff00);
+   	   				else
+   	   					pgDrawable1.getPaint().setColor(0xff00ff00);
+     	   			} 
+     	   			if(membraneTest == 0)
+     	   			{
+     	   				//Normal Operation
+     	   				if(data[3] <= 20)
+     	   					pgDrawable2.getPaint().setColor(0xffff0000); 
+     	   				else if (data[3] <= 50)
+     	   					pgDrawable2.getPaint().setColor(0xffffff00);
+     	   				else
+     	   					pgDrawable2.getPaint().setColor(0xff00ff00); 
+     	   				
+     	  	   			if(feedPumpStatus == 0)
+     	  	   			{
+     		  	   			pb2.setProgress(0);
+     			   			data[3] = 93;
+     	  	   			}
+     	  	   			else
+     	  	   			{
+     		  	   			pb2.setProgress(data[3]);
+     	  	   			}
+     	   			}
+     	   			else
+     	   			{
+     	   				// Membrane Fail Test Case
+     	   				if(pb2.getProgress() > 10)
+     	   					pb2.setProgress(pb2.getProgress()-10);
 
-  	   				if(pb2.getProgress() <= 20)
-	   					pgDrawable2.getPaint().setColor(0xffff0000);
-	   				else if (pb2.getProgress() <= 50)
-	   					pgDrawable2.getPaint().setColor(0xffffff00);
-	   				else
-	   					pgDrawable2.getPaint().setColor(0xff00ff00);
-  	   			}
-  	   			if(voltageTest == 0)
-  	   			{
-  	   				// Normal Operation
-  	   				if(data[4] <= 20)
-  	   					pgDrawable3.getPaint().setColor(0xffff0000);
-  	   				else if (data[4] <= 50)
-  	   					pgDrawable3.getPaint().setColor(0xffffff00);
-  	   				else
-  	   					pgDrawable3.getPaint().setColor(0xff00ff00);
-  	   				
-  	  	   			if(feedPumpStatus == 0)
-  	  	   			{
-  		  	   			pb3.setProgress(0);
-  			   			data[4] = 97;
-  	  	   			}
-  	  	   			else
-  	  	   			{
-  		  	   			pb3.setProgress(data[4]);
-  	  	   			}
-  	   			}
-  	   			else
-  	   			{		
-  	   				// Voltage Fail Test Case
-  	   				if(pb3.getProgress() > 10)
-  	   					pb3.setProgress(pb3.getProgress()-10);
+     	   				if(pb2.getProgress() <= 20)
+     	   				{
+   	   					pgDrawable2.getPaint().setColor(0xffff0000);
+   	   					handler.postDelayed(updatePowerButton, 100);
+   	   					sysStatus = 2;
+     	   				}
+   	   				else if (pb2.getProgress() <= 50)
+   	   					pgDrawable2.getPaint().setColor(0xffffff00);
+   	   				else
+   	   					pgDrawable2.getPaint().setColor(0xff00ff00);
+     	   			}
+     	   			if(voltageTest == 0)
+     	   			{
+     	   				// Normal Operation
+     	   				if(data[4] <= 20)
+     	   					pgDrawable3.getPaint().setColor(0xffff0000);
+     	   				else if (data[4] <= 50)
+     	   					pgDrawable3.getPaint().setColor(0xffffff00);
+     	   				else
+     	   					pgDrawable3.getPaint().setColor(0xff00ff00);
+     	   				
+     	  	   			if(feedPumpStatus == 0)
+     	  	   			{
+     		  	   			pb3.setProgress(0);
+     			   			data[4] = 97;
+     	  	   			}
+     	  	   			else
+     	  	   			{
+     		  	   			pb3.setProgress(data[4]);
+     	  	   			}
+     	   			}
+     	   			else
+     	   			{		
+     	   				// Voltage Fail Test Case
+     	   				if(pb3.getProgress() > 10)
+     	   					pb3.setProgress(pb3.getProgress()-10);
 
-  	   				if(pb3.getProgress() <= 20)
-	   					pgDrawable3.getPaint().setColor(0xffff0000);
-	   				else if (pb3.getProgress() <= 50)
-	   					pgDrawable3.getPaint().setColor(0xffffff00);
-	   				else
-	   					pgDrawable3.getPaint().setColor(0xff00ff00);
-  	   			}
-  	   			if(waterPurityTest == 0)
-  	   			{
-  	   				// Normal Operation
-  	   				if(data[5] <= 20)
-  	   					pgDrawable4.getPaint().setColor(0xffff0000); 
-  	   				else if (data[5] <= 50)
-  	   					pgDrawable4.getPaint().setColor(0xffffff00);
-  	   				else
-  	   					pgDrawable4.getPaint().setColor(0xff00ff00); 
-  	   				
-  	  	   			if(feedPumpStatus == 0)
-  	  	   			{
-  		  	   			pb4.setProgress(0);
-  			   			data[5] = 100;
-  	  	   			}
-  	  	   			else
-  	  	   			{
-  		  	   			pb4.setProgress(data[5]);
-  	  	   			}
-  	   			}
-  	   			else
-  	   			{
-  	   				// Fail Test Case
-  	   				if(pb4.getProgress() > 10)
-  	   					pb4.setProgress(pb4.getProgress()-10);
+     	   				if(pb3.getProgress() <= 20)
+     	   				{
+   	   					pgDrawable3.getPaint().setColor(0xffff0000);
+   	   					handler.postDelayed(updatePowerButton, 100);
+   	   					sysStatus = 2;
+     	   				}
+   	   				else if (pb3.getProgress() <= 50)
+   	   					pgDrawable3.getPaint().setColor(0xffffff00);
+   	   				else
+   	   					pgDrawable3.getPaint().setColor(0xff00ff00);
+     	   			}
+     	   			if(waterPurityTest == 0)
+     	   			{
+     	   				// Normal Operation
+     	   				if(data[5] <= 20)
+     	   					pgDrawable4.getPaint().setColor(0xffff0000); 
+     	   				else if (data[5] <= 50)
+     	   					pgDrawable4.getPaint().setColor(0xffffff00);
+     	   				else
+     	   					pgDrawable4.getPaint().setColor(0xff00ff00); 
+     	   				
+     	  	   			if(feedPumpStatus == 0)
+     	  	   			{
+     		  	   			pb4.setProgress(0);
+     			   			data[5] = 100;
+     	  	   			}
+     	  	   			else
+     	  	   			{
+     		  	   			pb4.setProgress(data[5]);
+     	  	   			}
+     	   			}
+     	   			else
+     	   			{
+     	   				// Fail Test Case
+     	   				if(pb4.getProgress() > 10)
+     	   					pb4.setProgress(pb4.getProgress()-10);
 
-  	   				if(pb4.getProgress() <= 20)
-	   					pgDrawable4.getPaint().setColor(0xffff0000);
-	   				else if (pb4.getProgress() <= 50)
-	   					pgDrawable4.getPaint().setColor(0xffffff00);
-	   				else
-	   					pgDrawable4.getPaint().setColor(0xff00ff00);
-  	   			}
-			} 
-			
-   	  };
+     	   				if(pb4.getProgress() <= 20)
+     	   				{
+   	   					pgDrawable4.getPaint().setColor(0xffff0000);
+   	   					handler.postDelayed(updatePowerButton, 100);
+   	   					sysStatus = 2;
+     	   				}
+   	   				else if (pb4.getProgress() <= 50)
+   	   					pgDrawable4.getPaint().setColor(0xffffff00);
+   	   				else
+   	   					pgDrawable4.getPaint().setColor(0xff00ff00);
+     	   			}
+   			} 
+   			
+      	  };
   	  
    	  new Timer().scheduleAtFixedRate(task, 0, 1500);
    	  
