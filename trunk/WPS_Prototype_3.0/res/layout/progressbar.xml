@@ -3,121 +3,22 @@
     		    android:id="@+id/relativeLayout1"
     		    android:layout_width="match_parent"
     		    android:layout_height="match_parent" >
-
-    		    <Button
-    		        android:id="@+id/btnPwr"
-    		        android:layout_width="500dp"
-    		        android:layout_height="150dp"
-    		        android:layout_marginTop="39dp"
-    		        android:layout_x="121dp"
-    		        android:layout_y="68dp"
-    		        android:text="Power: OFF"
-    		        android:textAppearance="?android:attr/textAppearanceLarge"
-    		        android:textSize="40sp" />
-
-    		    <Button
-    		        android:id="@+id/btnVideoLib2"
-    		        android:layout_width="wrap_content"
-    		        android:layout_height="96dp"
-    		        android:layout_marginBottom="117dp"
-    		        android:layout_x="259dp"
-    		        android:layout_y="948dp"
-    		        android:text="Video Library"
-    		        android:textSize="40sp" />
-
-    		    <TextView
-    		        android:id="@+id/textView3"
-    		        android:layout_width="wrap_content"
-    		        android:layout_height="wrap_content"
-    		        android:layout_marginTop="140dp"
-    		        android:layout_x="98dp"
-    		        android:layout_y="784dp"
-    		        android:text="Water Purity"
-    		        android:textAppearance="?android:attr/textAppearanceLarge"
-    		        android:textSize="40sp" />
-
-    		    <ProgressBar
-    		        android:id="@+id/progressBar4"
-    		        style="?android:attr/progressBarStyleHorizontal"
-    		        android:layout_width="554dp"
-    		        android:layout_height="30dp"
-    		        android:layout_x="94dp"
-    		        android:layout_y="840dp" />
-
-    		    <TextView
-    		        android:id="@+id/textView4"
-    		        android:layout_width="wrap_content"
-    		        android:layout_height="wrap_content"
-    		        android:layout_x="98dp"
-    		        android:layout_y="668dp"
-    		        android:text="Voltage"
-    		        android:textAppearance="?android:attr/textAppearanceLarge"
-    		        android:textSize="40sp" />
-
-    		    <ProgressBar
-    		        android:id="@+id/progressBar3"
-    		        style="?android:attr/progressBarStyleHorizontal"
-    		        android:layout_width="554dp"
-    		        android:layout_height="30dp"
-    		        android:layout_x="94dp"
-    		        android:layout_y="720dp" />
-
-    		    <ProgressBar
-    		        android:id="@+id/progressBar1"
-    		        style="?android:attr/progressBarStyleHorizontal"
-    		        android:layout_width="554dp"
-    		        android:layout_height="30dp"
-    		        android:layout_x="94dp"
-    		        android:layout_y="560dp" />
-
-    		    <ProgressBar
-    		        android:id="@+id/progressBar2"
-    		        style="?android:attr/progressBarStyleHorizontal"
-    		        android:layout_width="554dp"
-    		        android:layout_height="30dp"
-    		        android:layout_x="94dp"
-    		        android:layout_y="444dp" />
-
-    		    <TextView
-    		        android:id="@+id/textView1"
-    		        android:layout_width="180dp"
-    		        android:layout_height="wrap_content"
-    		        android:layout_marginTop="87dp"
-    		        android:layout_x="98dp"
-    		        android:layout_y="399dp"
-    		        android:text="A: Filters"
-    		        android:textAppearance="?android:attr/textAppearanceLarge"
-    		        android:textSize="40sp" />
-
-    		    <TextView
-    		        android:id="@+id/textView2"
-    		        android:layout_width="wrap_content"
-    		        android:layout_height="wrap_content"
-    		        android:layout_marginTop="64dp"
-    		        android:layout_x="98dp"
-    		        android:layout_y="519dp"
-    		        android:text="B: R/O Membrane"
-    		        android:textAppearance="?android:attr/textAppearanceLarge"
-    		        android:textSize="40sp" />
-
-    		    <TextView
-    		        android:id="@+id/textView4"
-    		        android:layout_width="wrap_content"
-    		        android:layout_height="wrap_content"
-    		        android:layout_marginTop="150dp"
-    		        android:layout_x="91dp"
-    		        android:layout_y="301dp"
-    		        android:text="Feed Pump In Water"
-    		        android:textAppearance="?android:attr/textAppearanceLarge"
-    		        android:textSize="40sp" />
-
-    		    <ImageView
-    		        android:id="@+id/imageView1"
-    		        android:layout_width="123dp"
-    		        android:layout_height="80dp"
-    		        android:layout_x="527dp"
-    		        android:layout_y="290dp"
-    		        android:src="@drawable/red_x" />
-
+    		    <TextView android:id="@+id/textView1" android:textAppearance="?android:attr/textAppearanceLarge" android:text="A: Filters" android:layout_height="wrap_content" android:textSize="40sp" android:layout_width="wrap_content" android:layout_below="@+id/textView4" android:layout_alignLeft="@+id/textView4" android:layout_marginTop="47dp"></TextView>
+    		    <ProgressBar android:id="@+id/progressBar1" style="?android:attr/progressBarStyleHorizontal" android:layout_height="30dp" android:layout_width="554dp" android:layout_below="@+id/textView1" android:layout_alignLeft="@+id/textView4"></ProgressBar>
+    		    <TextView android:id="@+id/textView2" android:textAppearance="?android:attr/textAppearanceLarge" android:text="B: R/O Membrane" android:layout_height="wrap_content" android:textSize="40sp" android:layout_width="wrap_content" android:layout_below="@+id/progressBar1" android:layout_alignLeft="@+id/progressBar1" android:layout_marginTop="27dp"></TextView>
+    		    <ProgressBar android:id="@+id/progressBar2" style="?android:attr/progressBarStyleHorizontal" android:layout_height="30dp" android:layout_width="554dp" android:layout_below="@+id/textView2" android:layout_alignLeft="@+id/progressBar1"></ProgressBar>
+    		    <Button android:text="Power: OFF" android:id="@+id/btnPwr" android:layout_height="150dp" android:textAppearance="?android:attr/textAppearanceLarge" android:textSize="40sp" android:layout_width="500dp" android:layout_alignParentTop="true" android:layout_centerHorizontal="true" android:layout_marginTop="66dp"></Button>
+    		    <ImageView android:id="@+id/imageView1" android:layout_height="75dp" android:src="@drawable/red_x" android:layout_width="75dp" android:layout_above="@+id/textView1" android:layout_alignRight="@+id/btnPwr"></ImageView>
+    		    <TextView android:id="@+id/textView4" android:textAppearance="?android:attr/textAppearanceLarge" android:text="Feed Pump In Water" android:layout_height="wrap_content" android:textSize="40sp" android:layout_width="wrap_content" android:layout_below="@+id/btnPwr" android:layout_toLeftOf="@+id/imageView1" android:layout_marginRight="93dp" android:layout_marginTop="48dp"></TextView>
+    		    <ProgressBar android:id="@+id/ProgressBar02" style="?android:attr/progressBarStyleHorizontal" android:layout_height="30dp" android:layout_width="554dp" android:layout_below="@+id/textView1" android:layout_alignLeft="@+id/textView1"></ProgressBar>
+    		    <TextView android:id="@+id/TextView01" android:textAppearance="?android:attr/textAppearanceLarge" android:text="Voltage" android:layout_height="wrap_content" android:textSize="40sp" android:layout_width="wrap_content" android:layout_centerVertical="true" android:layout_alignLeft="@+id/progressBar2"></TextView>
+    		    <ProgressBar android:id="@+id/progressBar3" style="?android:attr/progressBarStyleHorizontal" android:layout_height="30dp" android:layout_width="554dp" android:layout_below="@+id/TextView01" android:layout_alignLeft="@+id/TextView01"></ProgressBar>
+    		    <TextView android:id="@+id/textView3" android:textAppearance="?android:attr/textAppearanceLarge" android:text="Water Purity" android:layout_height="wrap_content" android:textSize="40sp" android:layout_width="wrap_content" android:layout_below="@+id/progressBar3" android:layout_alignLeft="@+id/progressBar3" android:layout_marginTop="44dp"></TextView>
+    		    <ProgressBar android:id="@+id/progressBar4" style="?android:attr/progressBarStyleHorizontal" android:layout_height="30dp" android:layout_width="554dp" android:layout_below="@+id/textView3" android:layout_alignLeft="@+id/progressBar3"></ProgressBar>
+    		    <Button android:background="@null" android:id="@+id/btnTest1" android:layout_height="wrap_content" android:layout_width="wrap_content" android:layout_below="@+id/progressBar4" android:layout_alignParentLeft="true" android:layout_alignBottom="@+id/btnVideoLib2" android:layout_toLeftOf="@+id/btnVideoLib2"></Button>
+    		    <Button android:background="@null" android:id="@+id/btnTest3" android:layout_height="wrap_content" android:layout_width="wrap_content" android:layout_alignBottom="@+id/btnVideoLib2" android:layout_alignParentRight="true" android:layout_alignTop="@+id/btnTest1" android:layout_toRightOf="@+id/btnVideoLib2"></Button>
+    		    <Button android:text="Video Library" android:id="@+id/btnVideoLib2" android:layout_height="96dp" android:textSize="40sp" android:layout_width="wrap_content" android:layout_below="@+id/progressBar4" android:layout_toRightOf="@+id/textView1" android:layout_marginTop="146dp"></Button>
+    		    <Button android:background="@null" android:id="@+id/btnTest2" android:layout_width="wrap_content" android:layout_below="@+id/btnTest1" android:layout_alignParentLeft="true" android:layout_toLeftOf="@+id/btnVideoLib2" android:layout_height="500dp"></Button>
+    		    <Button android:background="@null" android:id="@+id/btnTest4" android:layout_width="wrap_content" android:layout_below="@+id/btnTest3" android:layout_alignParentRight="true" android:layout_alignLeft="@+id/btnTest3" android:layout_height="500dp"></Button>
     		</RelativeLayout>
  
